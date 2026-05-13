@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
+import { Container } from "@/components/layout/container";
 import { MdxContent } from "@/components/mdx/mdx-content";
 import { siteConfig } from "@/config/site";
 import { getArticleBySlug, getArticleSlugs } from "@/lib/content/articles";
@@ -57,26 +59,34 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   }
 
   return (
-    <main className="mx-auto w-full max-w-3xl px-6 py-16">
-      <article>
-        <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary">
-          Article
-        </p>
-        <h1 className="mt-4 font-serif text-5xl leading-tight text-foreground">
-          {article.title}
-        </h1>
-        <p className="mt-5 text-xl leading-8 text-muted-foreground">
-          {article.description}
-        </p>
-        <p className="mt-6 text-sm text-muted-foreground">
-          {new Intl.DateTimeFormat("en", {
-            dateStyle: "long",
-          }).format(new Date(article.publishedAt))}
-        </p>
-        <div className="mt-12">
-          <MdxContent source={article.body} />
-        </div>
-      </article>
+    <main>
+      <Container size="narrow" className="py-16 sm:py-20">
+        <article>
+          <Link
+            href="/articles"
+            className="text-sm font-semibold text-primary underline decoration-primary/30"
+          >
+            Back to articles
+          </Link>
+          <p className="mt-8 text-sm font-semibold uppercase tracking-[0.24em] text-primary">
+            Article
+          </p>
+          <h1 className="mt-4 font-serif text-5xl leading-tight text-foreground md:text-6xl">
+            {article.title}
+          </h1>
+          <p className="mt-5 text-xl leading-8 text-muted-foreground">
+            {article.description}
+          </p>
+          <p className="mt-6 text-sm text-muted-foreground">
+            {new Intl.DateTimeFormat("en", {
+              dateStyle: "long",
+            }).format(new Date(article.publishedAt))}
+          </p>
+          <div className="mt-12 border-t border-border pt-10">
+            <MdxContent source={article.body} />
+          </div>
+        </article>
+      </Container>
     </main>
   );
 }

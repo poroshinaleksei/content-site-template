@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Fraunces, Source_Sans_3 } from "next/font/google";
 
+import { Footer } from "@/components/layout/footer";
+import { Header } from "@/components/layout/header";
+import { siteConfig } from "@/config/site";
+
 import "./globals.css";
 
 const sans = Source_Sans_3({
@@ -16,8 +20,8 @@ const serif = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Website template",
-  description: "A starter template for small informational websites.",
+  title: siteConfig.defaultSeo.title,
+  description: siteConfig.defaultSeo.description,
 };
 
 export default function RootLayout({
@@ -26,8 +30,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable}`}>
-      <body>{children}</body>
+    <html lang={siteConfig.locale} className={`${sans.variable} ${serif.variable}`}>
+      <body>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
