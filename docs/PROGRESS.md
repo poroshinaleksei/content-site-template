@@ -2,6 +2,7 @@
 
 ## 2026-05-13
 
+- Implemented scaffold phase 1 with Next.js App Router, React, TypeScript, Tailwind CSS, config driven pages, reusable sections, typed local MDX articles, SEO defaults, optional GA4 boundary, contact form adapter contract, setup command, article scaffolding command and starter documentation.
 - Clarified the generator rollout as phase 1 local setup and phase 2 standalone `create-content-site`.
 - Updated the scaffold plan and `README.md` with the setup CLI direction, future headless CMS support, and project initialization workflow.
 - Expanded `docs/scaffold-v1-plan.md` with stronger AI first requirements, structured external links and social profile support, and deployment recommendation guidance.
