@@ -4,8 +4,11 @@ import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
 import { MdxContent } from "@/components/mdx/mdx-content";
+import { JsonLd } from "@/components/seo/json-ld";
 import { siteConfig } from "@/config/site";
 import { getArticleBySlug, getArticleSlugs } from "@/lib/content/articles";
+import { articleJsonLd } from "@/lib/seo/json-ld";
+import { absoluteUrl } from "@/lib/seo/metadata";
 
 type ArticlePageProps = {
   params: Promise<{
@@ -34,9 +37,14 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
   return {
     title,
     description,
+    alternates: {
+      canonical: absoluteUrl(`/articles/${article.slug}`),
+    },
     openGraph: {
       title,
       description,
+      url: absoluteUrl(`/articles/${article.slug}`),
+      siteName: siteConfig.name,
       images: [image],
       type: "article",
       publishedTime: article.publishedAt,
@@ -62,6 +70,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     <main>
       <Container size="narrow" className="py-16 sm:py-20">
         <article>
+          <JsonLd data={articleJsonLd(article)} />
           <Link
             href="/articles"
             className="text-sm font-semibold text-primary underline decoration-primary/30"

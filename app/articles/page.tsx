@@ -1,8 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 
 import { Container } from "@/components/layout/container";
 import { articlesPageConfig } from "@/config/pages";
 import { getAllArticles } from "@/lib/content/articles";
+import { createPageMetadata } from "@/lib/seo/metadata";
+
+export const metadata: Metadata = createPageMetadata(articlesPageConfig);
 
 export default async function ArticlesPage() {
   const articles = await getAllArticles();
