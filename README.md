@@ -9,6 +9,7 @@ The scaffold is intended to stay domain neutral so it can support different down
 - Repository level workflow and agent instructions
 - Pull request description template
 - Task document template for planning and review notes
+- Basic repository hygiene files for consistent local setup
 
 ## Working approach
 
