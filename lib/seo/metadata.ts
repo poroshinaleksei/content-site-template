@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 
 import { siteConfig } from "@/config/site";
-import type { PageConfig, SeoConfig } from "@/config/types";
+import type { Locale, PageConfig, SeoConfig } from "@/config/types";
+import { getLanguageAlternates, localizedPath } from "@/lib/i18n";
 
 type MetadataInput = {
   title: string;
   description: string;
   path: string;
+  locale: Locale;
   seo?: SeoConfig;
 };
 
@@ -18,25 +20,34 @@ export function createMetadata({
   title,
   description,
   path,
+  locale,
   seo,
 }: MetadataInput): Metadata {
   const metadataTitle = seo?.title ?? title;
   const metadataDescription = seo?.description ?? description;
-  const image = seo?.image ?? siteConfig.defaultSeo.image;
+  const image = seo?.image ?? siteConfig.defaultSeo[locale].image;
+  const localizedCanonicalPath = localizedPath(path, locale);
+  const languageAlternates = getLanguageAlternates(path);
 
   return {
     title: metadataTitle,
     description: metadataDescription,
     alternates: {
-      canonical: absoluteUrl(path),
+      canonical: absoluteUrl(localizedCanonicalPath),
+      languages: Object.fromEntries(
+        Object.entries(languageAlternates).map(([key, value]) => [
+          key,
+          absoluteUrl(value),
+        ]),
+      ),
     },
     openGraph: {
       title: metadataTitle,
       description: metadataDescription,
-      url: absoluteUrl(path),
+      url: absoluteUrl(localizedCanonicalPath),
       siteName: siteConfig.name,
       images: [image],
-      locale: siteConfig.locale,
+      locale,
       type: "website",
     },
     twitter: {
@@ -54,11 +65,12 @@ export function createMetadata({
   };
 }
 
-export function createPageMetadata(page: PageConfig) {
+export function createPageMetadata(page: PageConfig, locale: Locale) {
   return createMetadata({
     title: page.seo?.title ?? page.title,
     description: page.seo?.description ?? page.description,
     path: page.slug,
+    locale,
     seo: page.seo,
   });
 }

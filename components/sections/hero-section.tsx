@@ -1,16 +1,22 @@
 import Link from "next/link";
 
+import { getMessages } from "@/config/messages";
 import type { HeroSection as HeroSectionConfig } from "@/config/types";
+import type { Locale } from "@/config/types";
 import { buttonVariants } from "@/components/ui/button";
+import { localizedPath } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
 import { SectionShell } from "./section-shell";
 
 type HeroSectionProps = {
   section: HeroSectionConfig;
+  locale: Locale;
 };
 
-export function HeroSection({ section }: HeroSectionProps) {
+export function HeroSection({ section, locale }: HeroSectionProps) {
+  const messages = getMessages(locale);
+
   return (
     <SectionShell className="relative overflow-hidden py-20 sm:py-24" size="wide">
       <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
@@ -32,14 +38,17 @@ export function HeroSection({ section }: HeroSectionProps) {
           ) : null}
           <div className="mt-8 flex flex-wrap gap-3">
             {section.primaryAction ? (
-              <Link className={buttonVariants()} href={section.primaryAction.href}>
+              <Link
+                className={buttonVariants()}
+                href={localizedPath(section.primaryAction.href, locale)}
+              >
                 {section.primaryAction.label}
               </Link>
             ) : null}
             {section.secondaryAction ? (
               <Link
                 className={buttonVariants({ variant: "secondary" })}
-                href={section.secondaryAction.href}
+                href={localizedPath(section.secondaryAction.href, locale)}
               >
                 {section.secondaryAction.label}
               </Link>
@@ -50,7 +59,7 @@ export function HeroSection({ section }: HeroSectionProps) {
         {section.highlights?.length ? (
           <div className="border-y border-border py-5 lg:mb-4">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              Built around
+              {messages.builtAround}
             </p>
             <div className="mt-5 grid gap-3">
               {section.highlights.map((highlight, index) => (

@@ -5,15 +5,23 @@ export type SeoConfig = {
   noIndex?: boolean;
 };
 
+export type Locale = "nb" | "en";
+
+export type Localized<T> = Record<Locale, T>;
+
 export type SiteConfig = {
   name: string;
   owner: string;
-  description: string;
   url: string;
-  locale: string;
-  defaultSeo: Required<Pick<SeoConfig, "title" | "description">> & {
-    image: string;
-  };
+  defaultLocale: Locale;
+  locales: Locale[];
+  localeLabels: Localized<string>;
+  description: Localized<string>;
+  defaultSeo: Localized<
+    Required<Pick<SeoConfig, "title" | "description">> & {
+      image: string;
+    }
+  >;
 };
 
 export type NavigationItem = {

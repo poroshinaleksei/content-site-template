@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 
-import { PageSections } from "@/components/sections/page-sections";
-import { aboutPageConfig } from "@/config/pages";
+import { AboutRoute } from "@/components/routes/about-route";
+import { getPageConfig } from "@/config/pages";
+import { siteConfig } from "@/config/site";
 import { createPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = createPageMetadata(aboutPageConfig);
+const locale = siteConfig.defaultLocale;
+
+export const metadata: Metadata = createPageMetadata(
+  getPageConfig("about", locale),
+  locale,
+);
 
 export default function AboutPage() {
-  return (
-    <main>
-      <PageSections sections={aboutPageConfig.sections} />
-    </main>
-  );
+  return <AboutRoute locale={locale} />;
 }

@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 
-import { PageSections } from "@/components/sections/page-sections";
-import { homePageConfig } from "@/config/pages";
+import { HomeRoute } from "@/components/routes/home-route";
+import { getPageConfig } from "@/config/pages";
+import { siteConfig } from "@/config/site";
 import { createPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = createPageMetadata(homePageConfig);
+const locale = siteConfig.defaultLocale;
+
+export const metadata: Metadata = createPageMetadata(
+  getPageConfig("home", locale),
+  locale,
+);
 
 export default async function HomePage() {
-  return (
-    <main>
-      <PageSections sections={homePageConfig.sections} />
-    </main>
-  );
+  return <HomeRoute locale={locale} />;
 }

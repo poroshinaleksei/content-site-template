@@ -1,15 +1,18 @@
 import Link from "next/link";
 
 import type { CtaSection as CtaSectionConfig } from "@/config/types";
+import type { Locale } from "@/config/types";
 import { buttonVariants } from "@/components/ui/button";
+import { localizedPath } from "@/lib/i18n";
 
 import { SectionShell } from "./section-shell";
 
 type CtaSectionProps = {
   section: CtaSectionConfig;
+  locale: Locale;
 };
 
-export function CtaSection({ section }: CtaSectionProps) {
+export function CtaSection({ section, locale }: CtaSectionProps) {
   return (
     <SectionShell>
       <div className="grid gap-6 border-y border-border py-10 md:grid-cols-[1fr_auto] md:items-center">
@@ -26,7 +29,10 @@ export function CtaSection({ section }: CtaSectionProps) {
           ) : null}
         </div>
         {section.action ? (
-          <Link className={buttonVariants()} href={section.action.href}>
+          <Link
+            className={buttonVariants()}
+            href={localizedPath(section.action.href, locale)}
+          >
             {section.action.label}
           </Link>
         ) : null}
