@@ -25,9 +25,6 @@ The launcher:
 It downloads an archive instead of running `git clone`. It does not own setup questions,
 config generation, dependency install, or verification.
 
-For private scaffold repositories, run the launcher with `GITHUB_TOKEN` or `GH_TOKEN`
-available in the environment. The token needs read access to the scaffold repository.
-
 ## Generator flow
 
 From this repository:
