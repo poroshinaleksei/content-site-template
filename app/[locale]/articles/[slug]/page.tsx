@@ -16,14 +16,18 @@ type LocalizedArticlePageProps = {
 };
 
 export async function generateStaticParams() {
-  const slugs = await getArticleSlugs();
+  const params = await Promise.all(
+    nonDefaultLocales.map(async (locale) => {
+      const slugs = await getArticleSlugs(locale);
 
-  return nonDefaultLocales.flatMap((locale) =>
-    slugs.map((slug) => ({
-      locale,
-      slug,
-    })),
+      return slugs.map((slug) => ({
+        locale,
+        slug,
+      }));
+    }),
   );
+
+  return params.flat();
 }
 
 export async function generateMetadata({
@@ -35,7 +39,7 @@ export async function generateMetadata({
     return {};
   }
 
-  const article = await getArticleBySlug(slug);
+  const article = await getArticleBySlug(slug, { locale });
 
   if (!article) {
     return {};

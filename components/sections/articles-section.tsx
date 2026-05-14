@@ -14,7 +14,7 @@ type ArticlesSectionProps = {
 };
 
 export async function ArticlesSection({ section, locale }: ArticlesSectionProps) {
-  const articles = (await getAllArticles()).slice(0, section.limit ?? 3);
+  const articles = (await getAllArticles({ locale })).slice(0, section.limit ?? 3);
   const messages = getMessages(locale);
 
   return (

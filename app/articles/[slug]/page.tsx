@@ -15,14 +15,14 @@ type ArticlePageProps = {
 const locale = siteConfig.defaultLocale;
 
 export async function generateStaticParams() {
-  const slugs = await getArticleSlugs();
+  const slugs = await getArticleSlugs(locale);
 
   return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const article = await getArticleBySlug(slug);
+  const article = await getArticleBySlug(slug, { locale });
 
   if (!article) {
     return {};

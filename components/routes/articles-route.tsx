@@ -13,7 +13,7 @@ type ArticlesRouteProps = {
 
 export async function ArticlesRoute({ locale }: ArticlesRouteProps) {
   const page = getPageConfig("articles", locale);
-  const articles = await getAllArticles();
+  const articles = await getAllArticles({ locale });
 
   return (
     <SiteShell locale={locale} path={page.slug}>

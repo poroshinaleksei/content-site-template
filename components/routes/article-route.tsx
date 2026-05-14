@@ -17,7 +17,7 @@ type ArticleRouteProps = {
 };
 
 export async function ArticleRoute({ locale, slug }: ArticleRouteProps) {
-  const article = await getArticleBySlug(slug);
+  const article = await getArticleBySlug(slug, { locale });
   const messages = getMessages(locale);
   const path = `/articles/${slug}`;
 

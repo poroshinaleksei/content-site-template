@@ -1,6 +1,7 @@
 import { siteConfig } from "@/config/site";
 import type { Locale } from "@/config/types";
 import type { Article } from "@/lib/content/schemas";
+import { localizedPath } from "@/lib/i18n";
 
 import { absoluteUrl } from "./metadata";
 
@@ -32,7 +33,7 @@ export function articleJsonLd(article: Article, locale: Locale) {
     headline: article.title,
     description: article.description,
     datePublished: article.publishedAt,
-    url: absoluteUrl(`/articles/${article.slug}`),
+    url: absoluteUrl(localizedPath(`/articles/${article.slug}`, locale)),
     image: article.coverImage ? absoluteUrl(article.coverImage) : undefined,
     inLanguage: locale,
   };
