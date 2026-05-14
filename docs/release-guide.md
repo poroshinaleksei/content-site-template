@@ -26,6 +26,9 @@ npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/co
 Use `main` for active development and smoke testing. Use tags such as `v0.1.0` when the
 same scaffold snapshot should be repeatable later.
 
+TODO: create `v0.1.0` after the main branch checks pass and the current scaffold snapshot
+is accepted as the first stable public scaffold release.
+
 ## Launcher releases
 
 The npm launcher package lives in `packages/create-content-site`.

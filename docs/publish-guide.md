@@ -49,12 +49,17 @@ npm login
 npm publish --access public
 ```
 
+The npm registry reflects only published package versions. A local version bump in
+`packages/create-content-site/package.json` is not visible through `npm view` or `npx`
+until `npm publish` completes. Registry metadata can lag briefly after publish, so verify
+with `--prefer-online` when checking immediately.
+
 ## Verify
 
 Check package metadata:
 
 ```bash
-npm view create-content-site version dist-tags repository homepage bugs --json
+npm view create-content-site version dist-tags repository homepage bugs --json --prefer-online
 ```
 
 Check the public install flow from a clean temporary directory:
