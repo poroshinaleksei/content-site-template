@@ -25,7 +25,7 @@ export function ServicesSection({ section }: ServicesSectionProps) {
         {section.services.map((service) => (
           <article
             key={service.title}
-            className="rounded-md border border-border bg-background p-6"
+            className="rounded-md border border-border bg-surface p-6"
           >
             <h3 className="font-serif text-2xl leading-tight">{service.title}</h3>
             <p className="mt-4 text-base leading-7 text-muted-foreground">

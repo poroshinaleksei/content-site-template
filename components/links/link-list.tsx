@@ -19,7 +19,7 @@ export function LinkList({ links }: LinkListProps) {
             href={link.href}
             target={link.href.startsWith("http") ? "_blank" : undefined}
             rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-            className="group flex items-center justify-between gap-4 rounded-md border border-border bg-background p-4 transition-colors hover:border-primary/50 hover:bg-muted"
+            className="group flex items-center justify-between gap-4 rounded-md border border-border bg-surface p-4 transition-colors hover:border-primary/50 hover:bg-muted"
           >
             <span>
               <span className="flex items-center gap-2 font-semibold text-foreground">

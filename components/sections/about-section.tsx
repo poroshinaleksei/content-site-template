@@ -31,7 +31,7 @@ export function AboutSection({ section }: AboutSectionProps) {
               {section.items.map((item) => (
                 <li
                   key={item}
-                  className="rounded-md border border-border bg-background px-4 py-3 text-sm font-semibold text-foreground"
+                  className="rounded-md border border-border bg-surface px-4 py-3 text-sm font-semibold text-foreground"
                 >
                   {item}
                 </li>

@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { siteConfig } from "@/config/site";
 import { createMetadata } from "@/lib/seo/metadata";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
+import { getThemeAttributes, getThemeStyle } from "@/lib/theme";
 
 import "./globals.css";
 
@@ -39,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={siteConfig.locale} className={`${sans.variable} ${serif.variable}`}>
-      <body>
+      <body style={getThemeStyle()} {...getThemeAttributes()}>
         <JsonLd data={websiteJsonLd()} />
         <JsonLd data={organizationJsonLd()} />
         <Header />

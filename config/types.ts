@@ -44,7 +44,14 @@ export type ExternalLink = {
   description?: string;
 };
 
+export type ThemePreset = "nordic-warm" | "minimal" | "playful" | "editorial";
+
 export type ThemeConfig = {
+  themePreset: ThemePreset;
+};
+
+export type ThemePresetConfig = {
+  label: string;
   radius: "sm" | "md" | "lg";
   palette: {
     background: string;
@@ -52,11 +59,17 @@ export type ThemeConfig = {
     primary: string;
     accent: string;
     muted: string;
+    border: string;
+    surface: string;
+    surfaceContrast: string;
   };
   typography: {
     heading: string;
     body: string;
   };
+  backgroundStyle: "grid" | "plain" | "paper" | "blocks";
+  spacingDensity: "compact" | "comfortable" | "spacious";
+  buttonStyle: "solid" | "outline" | "soft" | "ink";
 };
 
 export type FeatureConfig = {

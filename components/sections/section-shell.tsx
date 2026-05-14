@@ -11,7 +11,7 @@ type SectionShellProps = {
 
 export function SectionShell({ children, className, size }: SectionShellProps) {
   return (
-    <section className={cn("py-16 sm:py-20", className)}>
+    <section className={cn("py-[var(--section-spacing-y)]", className)}>
       <Container size={size}>{children}</Container>
     </section>
   );

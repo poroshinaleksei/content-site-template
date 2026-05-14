@@ -16,7 +16,13 @@ const sizes = {
 
 export function Container({ children, className, size = "default" }: ContainerProps) {
   return (
-    <div className={cn("mx-auto w-full px-5 sm:px-6 lg:px-8", sizes[size], className)}>
+    <div
+      className={cn(
+        "mx-auto w-full px-[var(--container-padding-x)] lg:px-8",
+        sizes[size],
+        className,
+      )}
+    >
       {children}
     </div>
   );

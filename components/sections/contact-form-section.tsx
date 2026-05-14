@@ -47,7 +47,7 @@ export function ContactFormSection({ section }: ContactFormSectionProps) {
                 Name
               </label>
               <input
-                className="mt-2 min-h-11 w-full rounded-md border border-border bg-background px-3 text-foreground"
+                className="mt-2 min-h-11 w-full rounded-md border border-border bg-surface px-3 text-foreground"
                 id="name"
                 name="name"
                 type="text"
@@ -60,7 +60,7 @@ export function ContactFormSection({ section }: ContactFormSectionProps) {
                 Email
               </label>
               <input
-                className="mt-2 min-h-11 w-full rounded-md border border-border bg-background px-3 text-foreground"
+                className="mt-2 min-h-11 w-full rounded-md border border-border bg-surface px-3 text-foreground"
                 id="email"
                 name="email"
                 type="email"
@@ -73,7 +73,7 @@ export function ContactFormSection({ section }: ContactFormSectionProps) {
                 Phone
               </label>
               <input
-                className="mt-2 min-h-11 w-full rounded-md border border-border bg-background px-3 text-foreground"
+                className="mt-2 min-h-11 w-full rounded-md border border-border bg-surface px-3 text-foreground"
                 id="phone"
                 name="phone"
                 type="tel"
@@ -85,7 +85,7 @@ export function ContactFormSection({ section }: ContactFormSectionProps) {
                 Message
               </label>
               <textarea
-                className="mt-2 min-h-36 w-full rounded-md border border-border bg-background px-3 py-3 text-foreground"
+                className="mt-2 min-h-36 w-full rounded-md border border-border bg-surface px-3 py-3 text-foreground"
                 id="message"
                 name="message"
                 required

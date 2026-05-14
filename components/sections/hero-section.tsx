@@ -56,7 +56,7 @@ export function HeroSection({ section }: HeroSectionProps) {
               {section.highlights.map((highlight, index) => (
                 <div
                   className={cn(
-                    "flex items-center justify-between rounded-md border border-border bg-background p-4",
+                    "flex items-center justify-between rounded-md border border-border bg-surface p-4",
                     index === 1 && "lg:translate-x-6",
                   )}
                   key={highlight}
