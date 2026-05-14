@@ -49,7 +49,7 @@ When the user wants a new site from this scaffold, a short prompt should be enou
 Example:
 
 ```text
-Use this repository as the scaffold source. Create a new local project first, run setup, get the baseline site running, then customize it through AGENTS.md, brief.md, config/, and content/.
+Use this repository as the scaffold source. In this new local folder, create the baseline project from the scaffold first. Run the setup flow, get the site running locally, and do not start deeper customization until the baseline project is ready.
 ```
 
 ## What to avoid

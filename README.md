@@ -67,7 +67,7 @@ Recommended user flow:
 Short Codex prompt example:
 
 ```text
-Use this repository as the scaffold source. Create a new local project here, initialize it from the scaffold, run the project setup flow, get the baseline site running, and then continue with customization through AGENTS.md, brief.md, config/, and content/.
+Use this repository as the scaffold source. In this new local folder, create the baseline project from the scaffold first. Run the setup flow, get the site running locally, and do not start deeper customization until the baseline project is ready.
 ```
 
 What Codex should do from that prompt:

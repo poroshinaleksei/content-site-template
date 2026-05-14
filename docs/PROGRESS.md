@@ -2,6 +2,7 @@
 
 ## 2026-05-14
 
+- Tightened the recommended Codex prompt in `README.md` and `docs/codex-guide.md` to make the baseline first workflow more explicit.
 - Added a clearer value proposition to `README.md`, including faster project setup, lower token usage, and more consistent client project output.
 - Adjusted the `README.md` Codex section to describe the user facing workflow first and the internal Codex actions second.
 - Refined `README.md` into a cleaner product level entrypoint with a tighter Codex usage flow and clearer scope description.
