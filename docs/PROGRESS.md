@@ -2,6 +2,8 @@
 
 ## 2026-05-14
 
+- Extended `pnpm setup` and `AGENTS` templating to ask for user communication language and documentation language in generated projects.
+- Tightened scaffold source instructions in `AGENTS.md`, `README.md`, and `docs/codex-guide.md` so Codex creates a runnable baseline project before deeper customization.
 - Replaced duplicated `AGENTS` text in setup with a single `AGENTS.template.md` source.
 - Updated `AGENTS.md` to work as a downstream project instruction file and taught `pnpm setup` to rewrite it with project specific identity.
 - Added localized routing for Norwegian default URLs and English `/en` URLs, including localized navigation, UI messages, metadata alternates, sitemap entries and article content folders.

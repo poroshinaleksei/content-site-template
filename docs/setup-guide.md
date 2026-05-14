@@ -12,6 +12,8 @@ The command asks for:
 
 - Site name
 - Owner or brand name
+- User communication language
+- Documentation language
 - Short site description in Norwegian
 - Short site description in English
 - Expected domain
@@ -40,6 +42,9 @@ The command asks for:
 Review the generated files, especially `AGENTS.md`, then update page composition in
 `config/pages/`, active preset data in `config/presets.ts`, and article content in
 `content/articles/<locale>/`.
+
+The setup flow uses the selected communication and documentation languages in `AGENTS.md`.
+Commit messages, code comments, and source code still stay in English.
 
 Run:
 

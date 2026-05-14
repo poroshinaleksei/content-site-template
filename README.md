@@ -6,6 +6,10 @@ The scaffold is built with Next.js App Router, React, TypeScript, Tailwind CSS,
 shadcn/ui style primitives, local typed MDX content, config driven pages and reusable
 sections.
 
+This repository is meant to work as a scaffold source for Codex and similar tools.
+The intended flow is to create a new local project from this repository first, run setup,
+start the baseline site, and only then continue with deeper customization.
+
 ## Quick start
 
 ```bash
@@ -15,6 +19,26 @@ pnpm dev
 ```
 
 Open `http://localhost:3000`.
+
+## Using this template with Codex
+
+When using Codex, the expected flow is:
+
+1. Use this repository as the scaffold source.
+2. Create a new local project from it.
+3. Run `pnpm install`.
+4. Run `pnpm setup`.
+5. Run `pnpm dev`.
+6. Only after the baseline site is running, continue with client specific customization.
+
+The setup flow also asks for the preferred user communication language and documentation language for the generated project.
+Commit messages, code comments, and source code stay in English.
+
+Short Codex prompt example:
+
+```text
+Use this repository as the scaffold source. Create a new local project first, run setup, get the baseline site running, then customize it through AGENTS.md, brief.md, config/, and content/.
+```
 
 ## Main commands
 

@@ -35,6 +35,16 @@ function choice(value, allowed, fallback) {
   return allowed.includes(value) ? value : fallback;
 }
 
+function languageLabel(value) {
+  return (
+    {
+      russian: "Russian",
+      english: "English",
+      norwegian: "Norwegian",
+    }[value] || "English"
+  );
+}
+
 function linkObject(link) {
   const lines = [
     "  {",
@@ -224,6 +234,8 @@ async function writeAgentsFile(answers) {
     url: answers.url,
     siteType: answers.siteType,
     themePreset: answers.themePreset,
+    communicationLanguage: languageLabel(answers.communicationLanguage),
+    documentationLanguage: languageLabel(answers.documentationLanguage),
   });
 
   await fs.writeFile("AGENTS.md", content);
@@ -242,6 +254,16 @@ console.log("Initialize this website template for a new client project.");
 const answers = {
   siteName: await ask("Site name", "Website template"),
   owner: await ask("Owner or brand name", "Site owner"),
+  communicationLanguage: choice(
+    await ask("User communication language (russian, english, norwegian)", "russian"),
+    ["russian", "english", "norwegian"],
+    "russian",
+  ),
+  documentationLanguage: choice(
+    await ask("Documentation language (english, russian, norwegian)", "english"),
+    ["english", "russian", "norwegian"],
+    "english",
+  ),
   descriptionNb: await ask(
     "Short site description in Norwegian",
     "En startmal for små innholdsbaserte nettsider.",

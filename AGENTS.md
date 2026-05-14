@@ -6,6 +6,10 @@ This project was created from the content site scaffold.
 It should keep the scaffold architecture unless the brief or a validated project need requires a change.
 Use `brief.md` and `config/` as the main sources of project specific truth.
 
+If this repository is still in its generic scaffold state, treat it as a scaffold source first.
+In that case, create a new local project from it, run `pnpm setup`, and get the baseline site running before doing deeper customization work.
+Do not start with deep component rewrites while the project identity is still generic.
+
 Current default project identity:
 
 - Site name: Website template
@@ -19,7 +23,8 @@ If these values are still generic, run `pnpm setup` before doing substantial cus
 ## Working language
 
 - User communication: Russian
-- Documentation, commit messages, pull request text, code comments, and source code: English
+- Documentation and pull request text: English
+- Commit messages, code comments, and source code: English
 
 ## First files to read
 
@@ -32,6 +37,24 @@ If these values are still generic, run `pnpm setup` before doing substantial cus
 - `config/links.ts`
 
 If `brief.md` does not exist, start from `brief.example.md` or run `pnpm setup`.
+
+## Scaffold source workflow
+
+If the user asks to create a new site from this repository:
+
+- treat this repository as the scaffold source
+- create a new local project first instead of customizing the source repository in place
+- run `pnpm install`
+- run `pnpm setup`
+- run `pnpm dev`
+- confirm that the baseline site is runnable
+- only after that continue with client specific customization
+
+Question handling in scaffold mode:
+
+- prefer existing defaults, presets, and config surfaces first
+- avoid asking non critical questions before the runnable baseline project exists
+- ask follow up questions only when a missing answer materially affects architecture, feature scope, or data handling
 
 ## Repository workflow
 
@@ -62,6 +85,7 @@ If `brief.md` does not exist, start from `brief.example.md` or run `pnpm setup`.
 - Keep reusable section contracts stable unless the requested behavior cannot be expressed through the current configuration surface.
 - Do not duplicate site metadata, contact data, social links, or brand strings across multiple files.
 - Keep the project understandable for future AI and human edits.
+- When starting from the scaffold source, create the baseline project first and customize second.
 
 ## Scope control
 
