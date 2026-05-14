@@ -59,7 +59,8 @@ Open `http://localhost:3000`.
 
 ## Create a downstream project
 
-The primary workflow is to create a downstream site project through the launcher package.
+The primary workflow is to create a downstream site project through the published npm
+launcher package.
 The launcher downloads a scaffold archive from GitHub, extracts it into a temporary
 directory, and delegates to the generator inside the scaffold copy.
 
@@ -76,17 +77,20 @@ Use an explicit GitHub scaffold source when Codex should reference this reposito
 fork:
 
 ```bash
-npx create-content-site my-site --scaffold https://github.com/owner/repo
-npx create-content-site my-site --scaffold https://github.com/owner/repo --ref main
-npm create content-site@latest my-site -- --scaffold https://github.com/owner/repo
+npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/content-site-template
+npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/content-site-template --ref main
+npm create content-site@latest my-site -- --scaffold https://github.com/poroshinaleksei/content-site-template
 ```
 
 The launcher uses GitHub archive download, not `git clone`. It is a thin bootstrap layer.
 Setup questions, config generation, dependency install, and verification still live in
 the scaffold generator.
 
-For private scaffold repositories, run the launcher with `GITHUB_TOKEN` or `GH_TOKEN`
-available in the environment. The token needs read access to the scaffold repository.
+The default launcher source is:
+
+```text
+https://github.com/poroshinaleksei/content-site-template
+```
 
 The in repository generator path remains supported for scaffold development and local
 source checkouts.
@@ -207,7 +211,15 @@ Commit messages, code comments, and source code stay in English.
 
 ## Launcher package
 
-The `npx` launcher package lives in `packages/create-content-site`.
+The preferred public entry point is `create-content-site` from npm.
+
+Use:
+
+```bash
+npx create-content-site my-site
+```
+
+The launcher package source lives in `packages/create-content-site`.
 
 It owns only:
 
@@ -220,35 +232,7 @@ It does not own scaffold setup behavior. Keep setup prompts, config writing, ins
 verification in `scripts/setup-core.mjs`, `scripts/setup.mjs`, and
 `scripts/generate-site.mjs`.
 
-Maintainer publish flow:
-
-```bash
-cd packages/create-content-site
-npm pack
-mkdir -p /tmp/create-content-site-check
-cd /tmp/create-content-site-check
-npx /path/to/create-content-site-0.1.0.tgz my-site --skip-install
-cd /path/to/website-template/packages/create-content-site
-npm login
-npm publish --access public
-```
-
-The package name is set in `packages/create-content-site/package.json`. The default
-GitHub scaffold source and ref are set in
-`packages/create-content-site/bin/create-content-site.js`.
-
-Before publishing, confirm that the default scaffold archive URL is readable by the
-intended users. Public `npx create-content-site my-site` requires a public scaffold
-archive.
-
-Private scaffold archive checks require `GITHUB_TOKEN` or `GH_TOKEN` with read access.
-Do not store publish credentials or GitHub tokens in this repository.
-
-After publish, verify from a clean temporary directory:
-
-```bash
-npx create-content-site@latest my-site --skip-install
-```
+Maintainer publish instructions live in [docs/publish-guide.md](/Users/aleksei/website-template/docs/publish-guide.md).
 
 ## Verification
 

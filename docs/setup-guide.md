@@ -11,8 +11,8 @@ Use the launcher when starting from a clean local folder and a GitHub scaffold r
 ```bash
 npx create-content-site my-site
 npm create content-site@latest my-site
-npx create-content-site my-site --scaffold https://github.com/owner/repo
-npx create-content-site my-site --scaffold https://github.com/owner/repo --ref main
+npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/content-site-template
+npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/content-site-template --ref main
 ```
 
 The launcher:
@@ -24,9 +24,6 @@ The launcher:
 
 It downloads an archive instead of running `git clone`. It does not own setup questions,
 config generation, dependency install, or verification.
-
-For private scaffold repositories, run the launcher with `GITHUB_TOKEN` or `GH_TOKEN`
-available in the environment. The token needs read access to the scaffold repository.
 
 ## Generator flow
 
