@@ -1,0 +1,26 @@
+---
+title: "Welcome to the scaffold"
+slug: "welcome"
+description: "A short introduction to the content model and starter structure."
+publishedAt: "2026-05-13"
+excerpt: "This article shows how local MDX content becomes typed route data."
+coverImage: "/images/og-default.jpg"
+seo:
+  title: "Welcome to the scaffold"
+  description: "A short introduction to the local MDX content workflow."
+draft: false
+---
+
+This starter uses local MDX as the default content mode. Each article has frontmatter
+that is validated before it reaches a page.
+
+## What to edit first
+
+Start with the files in `config/` for site structure and `content/articles/` for writing.
+The route components read from the typed loader, so article pages do not parse files
+directly.
+
+## Why this matters
+
+Keeping content data behind one loader makes future CMS work easier. A later Decap or
+headless CMS integration can target the same article contract without changing every route.
