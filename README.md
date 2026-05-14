@@ -3,7 +3,7 @@
 AI first starter template for small informational websites.
 
 This repository is designed as a scaffold source for Codex and similar tools. It provides
-a runnable phase 1 baseline built with `Next.js App Router`, `React`, `TypeScript`,
+a runnable baseline built with `Next.js App Router`, `React`, `TypeScript`,
 `Tailwind CSS`, typed local `MDX`, config driven page composition, and reusable sections.
 
 ## Why use this scaffold
@@ -29,7 +29,7 @@ Use this template to start small content focused sites such as:
 
 ## Current scope
 
-Phase 1 is implemented and runnable.
+The current baseline is implemented and runnable.
 
 Current baseline includes:
 
@@ -39,10 +39,14 @@ Current baseline includes:
 - config driven sections and page composition
 - structured contact, social, and external links
 - optional `GA4` integration boundary
+- in repository generator flow for downstream site projects
 - local `pnpm setup` flow for new client projects
 - documentation for setup, customization, presets, i18n, deployment, and Codex workflow
 
-## Quick start
+Future scaffold improvements should be tracked in `docs/scaffold-v1-plan.md` and should
+assume the generator remains inside this repository unless project requirements change.
+
+## Quick start for scaffold development
 
 ```bash
 corepack enable
@@ -52,9 +56,41 @@ pnpm dev
 
 Open `http://localhost:3000`.
 
-## Using this template with Codex
+## Create a downstream project
+
+The primary workflow is to generate a new site project from this scaffold. The generator
+lives in this repository and is specific to this scaffold.
 
 Use this repository as the scaffold source, not as the final client project itself.
+
+From this repository:
+
+```bash
+pnpm install
+pnpm generate:site ../my-site
+```
+
+From a new local folder when Codex has access to this repository:
+
+```bash
+node /path/to/website-template/scripts/generate-site.mjs .
+```
+
+The generator copies the scaffold into the target folder, runs the same setup question
+model as `pnpm setup`, writes `AGENTS.md`, `brief.md`, and the main config files, installs
+dependencies, and runs `pnpm check`.
+
+The target directory must be empty and outside the scaffold repository.
+
+Useful options:
+
+- `--skip-install`: copy and configure the project without installing dependencies or running checks
+- `--skip-check`: skip `pnpm check` after setup
+
+After the generator finishes, run `pnpm dev` from the generated project and open
+`http://localhost:3000`.
+
+## Using the generator with Codex
 
 Recommended user flow:
 
@@ -64,20 +100,37 @@ Recommended user flow:
 4. Ask Codex to create the new project from the scaffold and start the baseline site.
 5. After the baseline project exists and runs, continue with client specific customization.
 
+The practical model is:
+
+- the generator is a local CLI inside this repository
+- Codex is the orchestrator that invokes the generator
+- the generator asks the setup questions
+- Codex decides which answers can safely use scaffold defaults and which answers must come from the user
+- Codex should keep the question set minimal and avoid asking for deeper customization before the baseline exists
+
 Short Codex prompt example:
 
 ```text
-Use this repository as the scaffold source. In this new local folder, create the baseline project from the scaffold first. Run the setup flow, get the site running locally, and do not start deeper customization until the baseline project is ready.
+Use the generator from this repository to create a new site project in this folder. Ask only the setup questions needed for the baseline, use scaffold defaults where possible, get the site runnable locally, and do not start deeper customization until the baseline project is ready.
 ```
 
 What Codex should do from that prompt:
 
-- copy or initialize the scaffold into the new local project
-- run dependency installation
-- run the project setup flow
+- invoke `scripts/generate-site.mjs` from this scaffold
+- create the new downstream project in the target folder
+- run the generator setup flow
+- ask the user only for missing identity and contact inputs that are needed for the baseline
+- use defaults and presets when the answer is non critical and the scaffold already provides a reasonable fallback
 - generate or update `AGENTS.md` and `brief.md`
-- start the local baseline site
+- install dependencies and run `pnpm check`
+- start the local baseline site from the generated project
 - only after that continue with deeper project specific work
+
+What Codex should not do:
+
+- do not customize the scaffold repository in place when the actual goal is a new site project
+- do not ask the full setup questionnaire up front if defaults already cover non critical fields
+- do not start redesigning pages or rewriting components before the generated baseline project runs locally
 
 The setup flow asks for:
 
@@ -90,6 +143,21 @@ The setup flow asks for:
 - social links
 - optional `GA4` measurement ID
 
+Questions Codex should usually ask:
+
+- site name
+- owner or brand name
+- expected domain, if known
+- contact email, if it should differ from the scaffold placeholder
+- preset choice, only when the intended site type is not already obvious from the request
+
+Questions Codex can often answer with defaults until later:
+
+- theme preset, unless the user already cares about visual direction
+- phone number and social links
+- `GA4` measurement ID
+- localized descriptions, if the user has not provided final wording yet
+
 Commit messages, code comments, and source code stay in English.
 
 ## Main commands
@@ -101,9 +169,10 @@ Commit messages, code comments, and source code stay in English.
 - `pnpm typecheck`: run TypeScript checks
 - `pnpm format`: check formatting
 - `pnpm check`: run lint, typecheck, and build
+- `pnpm generate:site <target-directory>`: create a downstream site project from this scaffold
 - `pnpm new:article "Article title"`: create a draft article in the default locale
 - `pnpm new:article -- --locale en "Article title"`: create a draft English article
-- `pnpm setup`: initialize a new client project
+- `pnpm setup`: configure an already copied project
 
 ## Verification
 
@@ -173,4 +242,4 @@ requested layout or behavior cannot be expressed through the existing configurat
 - [Content modes](docs/content-modes.md)
 - [i18n guide](docs/i18n-guide.md)
 - [Presets guide](docs/presets-guide.md)
-- [Scaffold v1 plan](docs/scaffold-v1-plan.md)
+- [Scaffold plan and roadmap](docs/scaffold-v1-plan.md)

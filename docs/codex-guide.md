@@ -8,16 +8,38 @@ When this repository is still generic, Codex should treat it as a scaffold sourc
 
 The expected order is:
 
-1. Create a new local project from this scaffold.
-2. Run `pnpm install`.
-3. Run `pnpm setup`.
-4. Run `pnpm dev`.
-5. Confirm the baseline site is runnable.
-6. Only then continue with client specific customization.
+1. Use the in repository generator entry point.
+2. Create a new local project from this scaffold.
+3. Run the generator setup questions with the user.
+4. Let the generator install dependencies and run `pnpm check`.
+5. Run `pnpm dev` from the generated project.
+6. Confirm the baseline site is runnable in a browser.
+7. Only then continue with client specific customization.
 
 Do not start with deep customization while the project still has generic identity values.
 Use defaults, presets, and setup output first. Ask follow up questions only when a missing
 answer materially affects architecture, feature scope, or data handling.
+
+## Generator entry point
+
+The generator lives inside this repository. It creates a downstream site project from
+this scaffold and reuses the setup flow instead of duplicating the questions.
+
+From this repository:
+
+```bash
+pnpm generate:site ../my-site
+```
+
+From a new local folder when Codex has access to the scaffold path:
+
+```bash
+node /path/to/website-template/scripts/generate-site.mjs .
+```
+
+The target directory must be empty and outside the scaffold repository. The generator
+copies scaffold files, skips local build and dependency artifacts, writes project
+identity files, installs dependencies, and verifies the baseline with `pnpm check`.
 
 ## First files to read
 
@@ -49,7 +71,7 @@ When the user wants a new site from this scaffold, a short prompt should be enou
 Example:
 
 ```text
-Use this repository as the scaffold source. In this new local folder, create the baseline project from the scaffold first. Run the setup flow, get the site running locally, and do not start deeper customization until the baseline project is ready.
+Use the generator from this repository to create a new site project in this folder. Ask only the setup questions needed for the baseline, use scaffold defaults where possible, get the site runnable locally, and do not start deeper customization until the baseline project is ready.
 ```
 
 ## What to avoid

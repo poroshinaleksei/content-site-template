@@ -42,10 +42,11 @@ If the user asks to create a new site from this repository:
 
 - treat this repository as the scaffold source
 - create a new local project first instead of customizing the source repository in place
-- run `pnpm install`
-- run `pnpm setup`
-- run `pnpm dev`
-- confirm that the baseline site is runnable
+- use the in repository generator entry point: `pnpm generate:site <target-directory>`
+- if running from a different working directory, use `node /path/to/website-template/scripts/generate-site.mjs .`
+- let the generator copy the scaffold, run setup, install dependencies, and run `pnpm check`
+- run `pnpm dev` inside the generated project
+- confirm that the baseline site is runnable in a browser
 - only after that continue with client specific customization
 
 Question handling in scaffold mode:

@@ -1,6 +1,44 @@
 # Setup guide
 
-Use the setup command after creating a new repository from this template.
+Use the generator when creating a new downstream site project from this scaffold. Use
+`pnpm setup` only after the scaffold files already exist in the target project.
+
+## Generator flow
+
+From this repository:
+
+```bash
+pnpm generate:site ../my-site
+```
+
+From a new local folder when Codex has access to the scaffold path:
+
+```bash
+node /path/to/website-template/scripts/generate-site.mjs .
+```
+
+The generator:
+
+- copies this scaffold into the target directory
+- skips `.git`, `node_modules`, `.next`, build output, cache files, logs and local env files
+- runs the shared setup question flow in the generated project
+- writes `AGENTS.md`, `brief.md`, and the main config files
+- runs `pnpm install`
+- runs `pnpm check`
+
+The target directory must be empty and outside the scaffold repository.
+
+Useful options:
+
+- `--skip-install`: copy and configure the project without installing dependencies or running checks
+- `--skip-check`: skip `pnpm check` after setup
+
+After generation, run `pnpm dev` from the generated project and open
+`http://localhost:3000`.
+
+## Setup flow
+
+Use the setup command after copying scaffold files into a project folder.
 
 ```bash
 pnpm setup
@@ -52,5 +90,5 @@ Run:
 pnpm check
 ```
 
-The command is local to this repository for phase 1. A later phase can extract the same
-questions and output contract into a standalone generator package.
+The generator and setup command share the same question and output contract. Keep changes
+to project identity in that shared setup logic so the two flows do not drift.

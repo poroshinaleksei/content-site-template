@@ -1,10 +1,12 @@
-# Scaffold v1 plan
+# Scaffold plan
 
 ## Summary
 
 Build a hosting neutral starter template for small informational websites using `Next.js App Router`, `React`, `TypeScript`, `Tailwind CSS`, `shadcn/ui`, and a typed `MDX` content layer.
 
-This `v1` should support the following workflow:
+This plan covers the implemented scaffold baseline and the remaining in repository roadmap.
+
+The scaffold should support the following workflow:
 
 - create a new repository from the GitHub template
 - run a project setup flow after repository creation
@@ -56,11 +58,12 @@ Generator and setup stance:
 - project initialization questions should be handled by a dedicated CLI generator or a post create `setup` command
 - the setup flow should be able to write the initial client specific config and content defaults into the new repository
 
-Generator rollout strategy:
+Generator and setup roadmap:
 
-- phase 1: ship a local `setup` command inside the scaffold repository
-- phase 2: extract the setup flow into a standalone `create-content-site` package
-- keep the setup questions and output contracts stable so the extraction does not require changing the scaffold architecture
+- keep the generator inside this scaffold repository
+- reuse one shared question and output contract between `pnpm generate:site` and `pnpm setup`
+- improve the in repository generator flow when new downstream project needs appear
+- avoid splitting the flow into a separate package unless repository specific constraints stop being true
 
 ### Project architecture
 
@@ -293,9 +296,9 @@ Output expectations:
 
 Implementation stance:
 
-- phase 1 should prioritize a working local `setup` command inside the scaffold repository
-- phase 2 should extract the generator into a standalone CLI package, for example `create-content-site`
-- the first implementation may ship the architecture and command contract before a full polished standalone generator is built
+- prioritize a working in repository generator and setup flow for downstream site creation
+- keep the architecture and command contract stable so Codex can rely on predictable setup behavior
+- treat future generator work as scaffold improvements, not as a separate product by default
 
 ### Documentation and AI workflow
 
