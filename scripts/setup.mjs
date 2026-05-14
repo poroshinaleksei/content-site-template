@@ -25,6 +25,10 @@ function quote(value) {
   return JSON.stringify(value);
 }
 
+function choice(value, allowed, fallback) {
+  return allowed.includes(value) ? value : fallback;
+}
+
 function linkObject(link) {
   const lines = [
     "  {",
@@ -49,18 +53,45 @@ async function writeSiteConfig(answers) {
 export const siteConfig = {
   name: ${quote(answers.siteName)},
   owner: ${quote(answers.owner)},
-  description: ${quote(answers.description)},
   url: ${quote(answers.url)},
-  locale: "en",
+  siteType: ${quote(answers.siteType)},
+  defaultLocale: "nb",
+  locales: ["nb", "en"],
+  localeLabels: {
+    nb: "Norsk",
+    en: "English",
+  },
+  description: {
+    nb: ${quote(answers.descriptionNb)},
+    en: ${quote(answers.descriptionEn)},
+  },
   defaultSeo: {
-    title: ${quote(answers.siteName)},
-    description: ${quote(answers.description)},
-    image: "/images/og-default.jpg",
+    nb: {
+      title: ${quote(answers.siteName)},
+      description: ${quote(answers.descriptionNb)},
+      image: "/images/og-default.jpg",
+    },
+    en: {
+      title: ${quote(answers.siteName)},
+      description: ${quote(answers.descriptionEn)},
+      image: "/images/og-default.jpg",
+    },
   },
 } satisfies SiteConfig;
 `;
 
   await fs.writeFile("config/site.ts", content);
+}
+
+async function writeThemeConfig(answers) {
+  const themePath = "config/theme.ts";
+  const content = await fs.readFile(themePath, "utf8");
+  const nextContent = content.replace(
+    /themePreset:\s*"[^"]+"/,
+    `themePreset: ${quote(answers.themePreset)}`,
+  );
+
+  await fs.writeFile(themePath, nextContent);
 }
 
 async function writeLinksConfig(answers) {
@@ -148,8 +179,14 @@ async function writeBrief(answers) {
 
 - Site name: ${answers.siteName}
 - Owner or brand: ${answers.owner}
-- Description: ${answers.description}
 - Domain: ${answers.url}
+- Site preset: ${answers.siteType}
+- Theme preset: ${answers.themePreset}
+
+## Localized description
+
+- Norwegian: ${answers.descriptionNb}
+- English: ${answers.descriptionEn}
 
 ## Contact
 
@@ -166,7 +203,7 @@ async function writeBrief(answers) {
 
 - Update page composition in \`config/pages/\`.
 - Update reusable site data in \`config/\`.
-- Add articles in \`content/articles/\`.
+- Add localized articles in \`content/articles/nb/\` and \`content/articles/en/\`.
 - Keep client specific details in config and content before changing components.
 `;
 
@@ -186,11 +223,28 @@ console.log("Initialize this website template for a new client project.");
 const answers = {
   siteName: await ask("Site name", "Website template"),
   owner: await ask("Owner or brand name", "Site owner"),
-  description: await ask(
-    "Short site description",
+  descriptionNb: await ask(
+    "Short site description in Norwegian",
+    "En startmal for små innholdsbaserte nettsider.",
+  ),
+  descriptionEn: await ask(
+    "Short site description in English",
     "A starter template for small informational websites.",
   ),
   url: normalizeUrl(await ask("Expected domain", "https://example.com")),
+  siteType: choice(
+    await ask(
+      "Site preset (single-childrens-book, writer-author, psychologist, small-business)",
+      "small-business",
+    ),
+    ["single-childrens-book", "writer-author", "psychologist", "small-business"],
+    "small-business",
+  ),
+  themePreset: choice(
+    await ask("Theme preset (nordic-warm, minimal, playful, editorial)", "nordic-warm"),
+    ["nordic-warm", "minimal", "playful", "editorial"],
+    "nordic-warm",
+  ),
   email: await ask("Contact email", "hello@example.com"),
   phone: await ask("Contact phone"),
   linkedin: normalizeUrl(await ask("LinkedIn URL")),
@@ -212,6 +266,7 @@ if (answers.facebook === "https://example.com") {
 }
 
 await writeSiteConfig(answers);
+await writeThemeConfig(answers);
 await writeLinksConfig(answers);
 await writeFeaturesConfig(answers);
 await writeBrief(answers);

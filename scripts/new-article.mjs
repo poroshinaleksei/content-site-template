@@ -3,10 +3,33 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const title = process.argv.slice(2).join(" ").trim();
+const locales = ["nb", "en"];
+const args = process.argv.slice(2);
+let locale = "nb";
+const titleParts = [];
 
-if (!title) {
-  console.error('Usage: pnpm new:article "Article title"');
+for (let index = 0; index < args.length; index += 1) {
+  const arg = args[index];
+
+  if (arg === "--locale") {
+    locale = args[index + 1] ?? locale;
+    index += 1;
+    continue;
+  }
+
+  if (arg.startsWith("--locale=")) {
+    locale = arg.split("=")[1] ?? locale;
+    continue;
+  }
+
+  titleParts.push(arg);
+}
+
+const title = titleParts.join(" ").trim();
+
+if (!title || !locales.includes(locale)) {
+  console.error('Usage: pnpm new:article -- --locale nb "Article title"');
+  console.error(`Allowed locales: ${locales.join(", ")}`);
   process.exit(1);
 }
 
@@ -20,7 +43,7 @@ function slugify(value) {
 }
 
 const slug = slugify(title);
-const articlesDirectory = path.join(process.cwd(), "content", "articles");
+const articlesDirectory = path.join(process.cwd(), "content", "articles", locale);
 const articlePath = path.join(articlesDirectory, `${slug}.mdx`);
 const today = new Date().toISOString().slice(0, 10);
 
