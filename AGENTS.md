@@ -87,6 +87,15 @@ Question handling in scaffold mode:
 - Keep the project understandable for future AI and human edits.
 - When starting from the scaffold source, create the baseline project first and customize second.
 
+## Frontend work
+
+- This is a frontend first project. Treat layout, typography, spacing, hierarchy, and responsive behavior as product level concerns.
+- Use a design oriented frontend approach for pages, sections, and visual systems instead of shipping a purely technical baseline.
+- Prefer reusable visual tokens, section patterns, and consistent interaction states over one off styling.
+- Avoid generic placeholder looking UI when implementing real site pages.
+- When the environment provides frontend design, browser, or frontend testing skills, prefer them for implementation and verification.
+- After notable UI changes, verify the result in a browser when practical.
+
 ## Scope control
 
 - Use the brief and config as the source of project specific decisions.

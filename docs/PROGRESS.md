@@ -2,6 +2,7 @@
 
 ## 2026-05-14
 
+- Added explicit frontend first and design oriented rules to `AGENTS.md` and `AGENTS.template.md`.
 - Extended `pnpm setup` and `AGENTS` templating to ask for user communication language and documentation language in generated projects.
 - Tightened scaffold source instructions in `AGENTS.md`, `README.md`, and `docs/codex-guide.md` so Codex creates a runnable baseline project before deeper customization.
 - Replaced duplicated `AGENTS` text in setup with a single `AGENTS.template.md` source.
