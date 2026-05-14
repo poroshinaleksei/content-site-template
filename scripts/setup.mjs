@@ -25,6 +25,12 @@ function quote(value) {
   return JSON.stringify(value);
 }
 
+function renderTemplate(content, replacements) {
+  return Object.entries(replacements).reduce((result, [key, value]) => {
+    return result.replaceAll(`{{${key}}}`, String(value));
+  }, content);
+}
+
 function choice(value, allowed, fallback) {
   return allowed.includes(value) ? value : fallback;
 }
@@ -210,6 +216,19 @@ async function writeBrief(answers) {
   await fs.writeFile("brief.md", content);
 }
 
+async function writeAgentsFile(answers) {
+  const template = await fs.readFile("AGENTS.template.md", "utf8");
+  const content = renderTemplate(template, {
+    siteName: answers.siteName,
+    owner: answers.owner,
+    url: answers.url,
+    siteType: answers.siteType,
+    themePreset: answers.themePreset,
+  });
+
+  await fs.writeFile("AGENTS.md", content);
+}
+
 async function writeEnvLocal(answers) {
   if (!answers.gaId) {
     return;
@@ -270,8 +289,9 @@ await writeThemeConfig(answers);
 await writeLinksConfig(answers);
 await writeFeaturesConfig(answers);
 await writeBrief(answers);
+await writeAgentsFile(answers);
 await writeEnvLocal(answers);
 
 rl.close();
 
-console.log("Setup complete. Review config/, brief.md, and content/ before launch.");
+console.log("Setup complete. Review AGENTS.md, config/, brief.md, and content/ before launch.");

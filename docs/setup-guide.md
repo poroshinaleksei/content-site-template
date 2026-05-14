@@ -26,6 +26,8 @@ The command asks for:
 
 ## Files updated
 
+- `AGENTS.md`
+- `AGENTS.template.md` is used as the source template for `AGENTS.md`
 - `config/site.ts`
 - `config/theme.ts`
 - `config/links.ts`
@@ -35,8 +37,9 @@ The command asks for:
 
 ## After setup
 
-Review the generated files, then update page composition in `config/pages/`, active
-preset data in `config/presets.ts`, and article content in `content/articles/<locale>/`.
+Review the generated files, especially `AGENTS.md`, then update page composition in
+`config/pages/`, active preset data in `config/presets.ts`, and article content in
+`content/articles/<locale>/`.
 
 Run:
 

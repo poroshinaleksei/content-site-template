@@ -2,6 +2,8 @@
 
 ## 2026-05-14
 
+- Replaced duplicated `AGENTS` text in setup with a single `AGENTS.template.md` source.
+- Updated `AGENTS.md` to work as a downstream project instruction file and taught `pnpm setup` to rewrite it with project specific identity.
 - Added localized routing for Norwegian default URLs and English `/en` URLs, including localized navigation, UI messages, metadata alternates, sitemap entries and article content folders.
 - Added theme presets for visual configuration through `config/theme.ts`, CSS variables and Tailwind tokens.
 - Added site presets in `config/presets.ts`, including a `single-childrens-book` home page composition with book sections.

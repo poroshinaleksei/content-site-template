@@ -4,13 +4,14 @@ Use this guide when adapting the template with Codex.
 
 ## First files to read
 
-1. `brief.md`, when it exists.
-2. `config/site.ts`
-3. `config/theme.ts`
-4. `config/presets.ts`
-5. `config/pages/`
-6. `config/links.ts`
-7. `content/articles/`
+1. `AGENTS.md`
+2. `brief.md`, when it exists.
+3. `config/site.ts`
+4. `config/theme.ts`
+5. `config/presets.ts`
+6. `config/pages/`
+7. `config/links.ts`
+8. `content/articles/`
 
 If `brief.md` does not exist, start from `brief.example.md` or run `pnpm setup`.
 

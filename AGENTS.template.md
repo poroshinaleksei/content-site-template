@@ -6,15 +6,13 @@ This project was created from the content site scaffold.
 It should keep the scaffold architecture unless the brief or a validated project need requires a change.
 Use `brief.md` and `config/` as the main sources of project specific truth.
 
-Current default project identity:
+Current project identity:
 
-- Site name: Website template
-- Owner or brand: Site owner
-- Domain: https://example.com
-- Site preset: small-business
-- Theme preset: nordic-warm
-
-If these values are still generic, run `pnpm setup` before doing substantial customization work.
+- Site name: {{siteName}}
+- Owner or brand: {{owner}}
+- Domain: {{url}}
+- Site preset: {{siteType}}
+- Theme preset: {{themePreset}}
 
 ## Working language
 
