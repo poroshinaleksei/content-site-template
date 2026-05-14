@@ -1,0 +1,17 @@
+{
+  "name": "create-content-site",
+  "version": "0.1.0",
+  "description": "Create a downstream content site project from the content site scaffold.",
+  "type": "module",
+  "bin": {
+    "create-content-site": "./bin/create-content-site.mjs"
+  },
+  "files": [
+    "bin/",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18.17"
+  },
+  "license": "UNLICENSED"
+}

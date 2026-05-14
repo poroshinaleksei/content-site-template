@@ -40,11 +40,12 @@ Current baseline includes:
 - structured contact, social, and external links
 - optional `GA4` integration boundary
 - in repository generator flow for downstream site projects
+- publishable `npx` style launcher for GitHub archive based bootstrap
 - local `pnpm setup` flow for new client projects
 - documentation for setup, customization, presets, i18n, deployment, and Codex workflow
 
-Future scaffold improvements should be tracked in `docs/scaffold-v1-plan.md` and should
-assume the generator remains inside this repository unless project requirements change.
+Future scaffold improvements should be tracked in `docs/scaffold-v1-plan.md`. The
+generator remains inside this repository and the launcher stays a thin bootstrap layer.
 
 ## Quick start for scaffold development
 
@@ -58,10 +59,37 @@ Open `http://localhost:3000`.
 
 ## Create a downstream project
 
-The primary workflow is to generate a new site project from this scaffold. The generator
-lives in this repository and is specific to this scaffold.
+The primary workflow is to create a downstream site project through the launcher package.
+The launcher downloads a scaffold archive from GitHub, extracts it into a temporary
+directory, and delegates to the generator inside the scaffold copy.
 
 Use this repository as the scaffold source, not as the final client project itself.
+
+From a new empty parent directory:
+
+```bash
+npx create-content-site my-site
+npm create content-site@latest my-site
+```
+
+Use an explicit GitHub scaffold source when Codex should reference this repository or a
+fork:
+
+```bash
+npx create-content-site my-site --scaffold https://github.com/owner/repo
+npx create-content-site my-site --scaffold https://github.com/owner/repo --ref main
+npm create content-site@latest my-site -- --scaffold https://github.com/owner/repo
+```
+
+The launcher uses GitHub archive download, not `git clone`. It is a thin bootstrap layer.
+Setup questions, config generation, dependency install, and verification still live in
+the scaffold generator.
+
+For private scaffold repositories, run the launcher with `GITHUB_TOKEN` or `GH_TOKEN`
+available in the environment. The token needs read access to the scaffold repository.
+
+The in repository generator path remains supported for scaffold development and local
+source checkouts.
 
 From this repository:
 
@@ -76,9 +104,10 @@ From a new local folder when Codex has access to this repository:
 node /path/to/website-template/scripts/generate-site.mjs .
 ```
 
-The generator copies the scaffold into the target folder, runs the same setup question
-model as `pnpm setup`, writes `AGENTS.md`, `brief.md`, and the main config files, installs
-dependencies, and runs `pnpm check`.
+Both entry points end at the same generator contract. The generator copies the scaffold
+into the target folder, runs the same setup question model as `pnpm setup`, writes
+`AGENTS.md`, `brief.md`, and the main config files, installs dependencies, and runs
+`pnpm check`.
 
 The target directory must be empty and outside the scaffold repository.
 
@@ -96,14 +125,15 @@ Recommended user flow:
 
 1. Create a new local folder or choose the new local project location.
 2. Open Codex in that new project context.
-3. Give Codex this repository as the scaffold source.
-4. Ask Codex to create the new project from the scaffold and start the baseline site.
+3. Give Codex this repository's GitHub URL as the scaffold source.
+4. Ask Codex to run the `npx` launcher and start the baseline site.
 5. After the baseline project exists and runs, continue with client specific customization.
 
 The practical model is:
 
-- the generator is a local CLI inside this repository
-- Codex is the orchestrator that invokes the generator
+- the launcher is a small published CLI that downloads a scaffold archive
+- the generator is the local CLI inside the downloaded scaffold copy
+- Codex is the orchestrator that invokes the launcher or the generator
 - the generator asks the setup questions
 - Codex decides which answers can safely use scaffold defaults and which answers must come from the user
 - Codex should keep the question set minimal and avoid asking for deeper customization before the baseline exists
@@ -111,12 +141,13 @@ The practical model is:
 Short Codex prompt example:
 
 ```text
-Use the generator from this repository to create a new site project in this folder. Ask only the setup questions needed for the baseline, use scaffold defaults where possible, get the site runnable locally, and do not start deeper customization until the baseline project is ready.
+Use npx create-content-site with this GitHub scaffold URL to create a new site project in this folder. Ask only the setup questions needed for the baseline, use scaffold defaults where possible, get the site runnable locally, and do not start deeper customization until the baseline project is ready.
 ```
 
 What Codex should do from that prompt:
 
-- invoke `scripts/generate-site.mjs` from this scaffold
+- invoke `npx create-content-site <target> --scaffold <github-url>` when no local scaffold checkout exists
+- invoke `scripts/generate-site.mjs` only when a local scaffold checkout is already available
 - create the new downstream project in the target folder
 - run the generator setup flow
 - ask the user only for missing identity and contact inputs that are needed for the baseline
@@ -173,6 +204,51 @@ Commit messages, code comments, and source code stay in English.
 - `pnpm new:article "Article title"`: create a draft article in the default locale
 - `pnpm new:article -- --locale en "Article title"`: create a draft English article
 - `pnpm setup`: configure an already copied project
+
+## Launcher package
+
+The `npx` launcher package lives in `packages/create-content-site`.
+
+It owns only:
+
+- argument parsing for launcher options
+- GitHub scaffold archive URL resolution
+- archive download and extraction into a temporary directory
+- delegation to `scripts/generate-site.mjs`
+
+It does not own scaffold setup behavior. Keep setup prompts, config writing, install, and
+verification in `scripts/setup-core.mjs`, `scripts/setup.mjs`, and
+`scripts/generate-site.mjs`.
+
+Maintainer publish flow:
+
+```bash
+cd packages/create-content-site
+npm pack
+mkdir -p /tmp/create-content-site-check
+cd /tmp/create-content-site-check
+npx /path/to/create-content-site-0.1.0.tgz my-site --skip-install
+cd /path/to/website-template/packages/create-content-site
+npm login
+npm publish --access public
+```
+
+The package name is set in `packages/create-content-site/package.json`. The default
+GitHub scaffold source and ref are set in
+`packages/create-content-site/bin/create-content-site.mjs`.
+
+Before publishing, confirm that the default scaffold archive URL is readable by the
+intended users. Public `npx create-content-site my-site` requires a public scaffold
+archive.
+
+Private scaffold archive checks require `GITHUB_TOKEN` or `GH_TOKEN` with read access.
+Do not store publish credentials or GitHub tokens in this repository.
+
+After publish, verify from a clean temporary directory:
+
+```bash
+npx create-content-site@latest my-site --skip-install
+```
 
 ## Verification
 

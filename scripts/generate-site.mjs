@@ -60,6 +60,8 @@ function shouldCopy(sourcePath) {
   if (
     parts.includes(".git") ||
     parts.includes("node_modules") ||
+    relative === path.join("packages", "create-content-site") ||
+    relative.startsWith(`${path.join("packages", "create-content-site")}${path.sep}`) ||
     parts.includes(".next") ||
     parts.includes("dist") ||
     parts.includes("build") ||
