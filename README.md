@@ -235,7 +235,7 @@ npm publish --access public
 
 The package name is set in `packages/create-content-site/package.json`. The default
 GitHub scaffold source and ref are set in
-`packages/create-content-site/bin/create-content-site.mjs`.
+`packages/create-content-site/bin/create-content-site.js`.
 
 Before publishing, confirm that the default scaffold archive URL is readable by the
 intended users. Public `npx create-content-site my-site` requires a public scaffold

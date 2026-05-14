@@ -31,7 +31,7 @@ Useful delegated options:
 ## Maintainer notes
 
 The package name is set in `package.json` under `name`. The default scaffold source and
-default ref are set in `bin/create-content-site.mjs`.
+default ref are set in `bin/create-content-site.js`.
 
 Before publishing, confirm that the default scaffold archive URL is readable by the
 intended users. Public `npx create-content-site my-site` requires a public scaffold

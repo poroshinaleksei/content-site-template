@@ -4,7 +4,7 @@
   "description": "Create a downstream content site project from the content site scaffold.",
   "type": "module",
   "bin": {
-    "create-content-site": "./bin/create-content-site.mjs"
+    "create-content-site": "bin/create-content-site.js"
   },
   "files": [
     "bin/",
