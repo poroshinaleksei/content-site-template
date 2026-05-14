@@ -5,16 +5,31 @@ export type SeoConfig = {
   noIndex?: boolean;
 };
 
+export type Locale = "nb" | "en";
+
+export type Localized<T> = Record<Locale, T>;
+
 export type SiteConfig = {
   name: string;
   owner: string;
-  description: string;
   url: string;
-  locale: string;
-  defaultSeo: Required<Pick<SeoConfig, "title" | "description">> & {
-    image: string;
-  };
+  siteType: SitePreset;
+  defaultLocale: Locale;
+  locales: Locale[];
+  localeLabels: Localized<string>;
+  description: Localized<string>;
+  defaultSeo: Localized<
+    Required<Pick<SeoConfig, "title" | "description">> & {
+      image: string;
+    }
+  >;
 };
+
+export type SitePreset =
+  | "single-childrens-book"
+  | "writer-author"
+  | "psychologist"
+  | "small-business";
 
 export type NavigationItem = {
   label: string;
@@ -44,7 +59,14 @@ export type ExternalLink = {
   description?: string;
 };
 
+export type ThemePreset = "nordic-warm" | "minimal" | "playful" | "editorial";
+
 export type ThemeConfig = {
+  themePreset: ThemePreset;
+};
+
+export type ThemePresetConfig = {
+  label: string;
   radius: "sm" | "md" | "lg";
   palette: {
     background: string;
@@ -52,11 +74,17 @@ export type ThemeConfig = {
     primary: string;
     accent: string;
     muted: string;
+    border: string;
+    surface: string;
+    surfaceContrast: string;
   };
   typography: {
     heading: string;
     body: string;
   };
+  backgroundStyle: "grid" | "plain" | "paper" | "blocks";
+  spacingDensity: "compact" | "comfortable" | "spacious";
+  buttonStyle: "solid" | "outline" | "soft" | "ink";
 };
 
 export type FeatureConfig = {
@@ -123,6 +151,52 @@ export type CtaSection = SectionBase<"cta"> & {
 
 export type ContactFormSection = SectionBase<"contact-form">;
 
+export type BookHeroSection = SectionBase<"book-hero"> & {
+  badge?: string;
+  coverImage?: string;
+  primaryAction?: NavigationItem;
+  secondaryAction?: NavigationItem;
+};
+
+export type BookIntroSection = SectionBase<"book-intro"> & {
+  quote?: string;
+};
+
+export type BookDetailsSection = SectionBase<"book-details"> & {
+  details: Array<{
+    label: string;
+    value: string;
+  }>;
+};
+
+export type IllustrationGallerySection = SectionBase<"illustration-gallery"> & {
+  images: Array<{
+    src: string;
+    alt: string;
+    caption?: string;
+  }>;
+};
+
+export type WhereToBuySection = SectionBase<"where-to-buy"> & {
+  links: Array<{
+    label: string;
+    href: string;
+    description?: string;
+  }>;
+};
+
+export type ForParentsSection = SectionBase<"for-parents"> & {
+  points: Array<{
+    title: string;
+    description: string;
+  }>;
+};
+
+export type AuthorBioSection = SectionBase<"author-bio"> & {
+  image?: string;
+  links?: NavigationItem[];
+};
+
 export type PageSection =
   | HeroSection
   | AboutSection
@@ -131,7 +205,16 @@ export type PageSection =
   | TestimonialsSection
   | FaqSection
   | CtaSection
-  | ContactFormSection;
+  | ContactFormSection
+  | BookHeroSection
+  | BookIntroSection
+  | BookDetailsSection
+  | IllustrationGallerySection
+  | WhereToBuySection
+  | ForParentsSection
+  | AuthorBioSection;
+
+export type PageKey = "home" | "about" | "articles" | "contact";
 
 export type PageConfig = {
   title: string;
@@ -139,4 +222,13 @@ export type PageConfig = {
   slug: string;
   seo?: SeoConfig;
   sections: PageSection[];
+};
+
+export type SitePresetConfig = {
+  label: string;
+  description: string;
+  pages: PageKey[];
+  sections: string[];
+  expectedData: string[];
+  pageOverrides?: Partial<Record<PageKey, Localized<PageConfig>>>;
 };

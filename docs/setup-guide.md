@@ -12,8 +12,13 @@ The command asks for:
 
 - Site name
 - Owner or brand name
-- Short site description
+- User communication language
+- Documentation language
+- Short site description in Norwegian
+- Short site description in English
 - Expected domain
+- Site preset
+- Theme preset
 - Contact email
 - Contact phone
 - LinkedIn URL
@@ -23,7 +28,10 @@ The command asks for:
 
 ## Files updated
 
+- `AGENTS.md`
+- `AGENTS.template.md` is used as the source template for `AGENTS.md`
 - `config/site.ts`
+- `config/theme.ts`
 - `config/links.ts`
 - `config/features.ts`
 - `brief.md`
@@ -31,8 +39,12 @@ The command asks for:
 
 ## After setup
 
-Review the generated files, then update page composition in `config/pages/` and article
-content in `content/articles/`.
+Review the generated files, especially `AGENTS.md`, then update page composition in
+`config/pages/`, active preset data in `config/presets.ts`, and article content in
+`content/articles/<locale>/`.
+
+The setup flow uses the selected communication and documentation languages in `AGENTS.md`.
+Commit messages, code comments, and source code still stay in English.
 
 Run:
 

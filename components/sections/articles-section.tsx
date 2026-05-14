@@ -1,16 +1,21 @@
 import Link from "next/link";
 
+import { getMessages } from "@/config/messages";
 import type { ArticlesSection as ArticlesSectionConfig } from "@/config/types";
+import type { Locale } from "@/config/types";
 import { getAllArticles } from "@/lib/content/articles";
+import { localizedPath } from "@/lib/i18n";
 
 import { SectionShell } from "./section-shell";
 
 type ArticlesSectionProps = {
   section: ArticlesSectionConfig;
+  locale: Locale;
 };
 
-export async function ArticlesSection({ section }: ArticlesSectionProps) {
-  const articles = (await getAllArticles()).slice(0, section.limit ?? 3);
+export async function ArticlesSection({ section, locale }: ArticlesSectionProps) {
+  const articles = (await getAllArticles({ locale })).slice(0, section.limit ?? 3);
+  const messages = getMessages(locale);
 
   return (
     <SectionShell className="border-y border-border bg-foreground text-background">
@@ -33,10 +38,10 @@ export async function ArticlesSection({ section }: ArticlesSectionProps) {
           ) : null}
         </div>
         <Link
-          href="/articles"
+          href={localizedPath("/articles", locale)}
           className="text-sm font-semibold text-background underline decoration-background/30"
         >
-          View all articles
+          {messages.viewAllArticles}
         </Link>
       </div>
 
@@ -44,7 +49,7 @@ export async function ArticlesSection({ section }: ArticlesSectionProps) {
         {articles.map((article) => (
           <Link
             key={article.slug}
-            href={`/articles/${article.slug}`}
+            href={localizedPath(`/articles/${article.slug}`, locale)}
             className="rounded-md border border-background/15 p-5 transition-colors hover:bg-background/10"
           >
             <p className="text-sm text-background/55">

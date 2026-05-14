@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 
-import { PageSections } from "@/components/sections/page-sections";
-import { contactPageConfig } from "@/config/pages";
+import { ContactRoute } from "@/components/routes/contact-route";
+import { getPageConfig } from "@/config/pages";
+import { siteConfig } from "@/config/site";
 import { createPageMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = createPageMetadata(contactPageConfig);
+const locale = siteConfig.defaultLocale;
+
+export const metadata: Metadata = createPageMetadata(
+  getPageConfig("contact", locale),
+  locale,
+);
 
 export default function ContactPage() {
-  return (
-    <main>
-      <PageSections sections={contactPageConfig.sections} />
-    </main>
-  );
+  return <ContactRoute locale={locale} />;
 }

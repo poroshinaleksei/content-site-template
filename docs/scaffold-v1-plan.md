@@ -107,7 +107,7 @@ Content source strategy:
 
 Content design:
 
-- articles live in `content/articles/*.mdx`
+- articles live in `content/articles/<locale>/*.mdx`
 - simple page content can live in `content/pages/*.mdx`
 - every content file follows one stable frontmatter schema
 - all content is loaded through typed loaders instead of route local file parsing
@@ -411,7 +411,7 @@ These interfaces become part of the template promise and should remain stable ac
 
 ### Content and routing
 
-- the articles page renders typed content from `content/articles`
+- the articles page renders typed content from `content/articles/<locale>`
 - article detail pages resolve by `slug`
 - draft articles are excluded from public listings and routes
 - malformed frontmatter fails clearly

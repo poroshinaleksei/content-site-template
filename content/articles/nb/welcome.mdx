@@ -1,0 +1,26 @@
+---
+title: "Velkommen til malen"
+slug: "welcome"
+description: "En kort introduksjon til innholdsmodellen og startstrukturen."
+publishedAt: "2026-05-13"
+excerpt: "Denne artikkelen viser hvordan lokal MDX blir typet rutedata."
+coverImage: "/images/og-default.jpg"
+seo:
+  title: "Velkommen til malen"
+  description: "En kort introduksjon til lokal MDX og innholdsarbeid."
+draft: false
+---
+
+Denne startmalen bruker lokal MDX som standard innholdsmodus. Hver artikkel har
+frontmatter som valideres før den når en side.
+
+## Hva du redigerer først
+
+Start med filene i `config/` for sidestruktur og `content/articles/nb/` for norske
+tekster. Rutekomponentene leser fra den typede loaderen, så artikkelsider parser ikke
+filer direkte.
+
+## Hvorfor det betyr noe
+
+Når innholdsdata holdes bak én loader, blir fremtidig CMS arbeid enklere. En senere Decap
+eller headless CMS integrasjon kan bruke samme artikkelkontrakt uten å endre alle rutene.

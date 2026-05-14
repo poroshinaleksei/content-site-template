@@ -3,12 +3,28 @@ import type { SiteConfig } from "./types";
 export const siteConfig = {
   name: "Website template",
   owner: "Site owner",
-  description: "A starter template for small informational websites.",
   url: "https://example.com",
-  locale: "en",
+  siteType: "small-business",
+  defaultLocale: "nb",
+  locales: ["nb", "en"],
+  localeLabels: {
+    nb: "Norsk",
+    en: "English",
+  },
+  description: {
+    nb: "En startmal for små innholdsbaserte nettsider.",
+    en: "A starter template for small informational websites.",
+  },
   defaultSeo: {
-    title: "Website template",
-    description: "A starter template for small informational websites.",
-    image: "/images/og-default.jpg",
+    nb: {
+      title: "Website template",
+      description: "En startmal for små innholdsbaserte nettsider.",
+      image: "/images/og-default.jpg",
+    },
+    en: {
+      title: "Website template",
+      description: "A starter template for small informational websites.",
+      image: "/images/og-default.jpg",
+    },
   },
 } satisfies SiteConfig;

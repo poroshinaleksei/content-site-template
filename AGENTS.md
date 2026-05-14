@@ -2,21 +2,66 @@
 
 ## Project context
 
-This repository is a GitHub template for starting informational websites.
-It should stay generic by default and avoid early coupling to a specific niche, brand, or content model.
-The first expected downstream sites are for a psychologist and a writer, but the scaffold must remain reusable for other content focused websites.
+This project was created from the content site scaffold.
+It should keep the scaffold architecture unless the brief or a validated project need requires a change.
+Use `brief.md` and `config/` as the main sources of project specific truth.
+
+If this repository is still in its generic scaffold state, treat it as a scaffold source first.
+In that case, create a new local project from it, run `pnpm setup`, and get the baseline site running before doing deeper customization work.
+Do not start with deep component rewrites while the project identity is still generic.
+
+Current default project identity:
+
+- Site name: Website template
+- Owner or brand: Site owner
+- Domain: https://example.com
+- Site preset: small-business
+- Theme preset: nordic-warm
+
+If these values are still generic, run `pnpm setup` before doing substantial customization work.
 
 ## Working language
 
 - User communication: Russian
-- Documentation, commit messages, pull request text, code comments, and source code: English
+- Documentation and pull request text: English
+- Commit messages, code comments, and source code: English
+
+## First files to read
+
+- `AGENTS.md`
+- `brief.md`, when it exists
+- `config/site.ts`
+- `config/theme.ts`
+- `config/presets.ts`
+- `config/pages/`
+- `config/links.ts`
+
+If `brief.md` does not exist, start from `brief.example.md` or run `pnpm setup`.
+
+## Scaffold source workflow
+
+If the user asks to create a new site from this repository:
+
+- treat this repository as the scaffold source
+- create a new local project first instead of customizing the source repository in place
+- run `pnpm install`
+- run `pnpm setup`
+- run `pnpm dev`
+- confirm that the baseline site is runnable
+- only after that continue with client specific customization
+
+Question handling in scaffold mode:
+
+- prefer existing defaults, presets, and config surfaces first
+- avoid asking non critical questions before the runnable baseline project exists
+- ask follow up questions only when a missing answer materially affects architecture, feature scope, or data handling
 
 ## Repository workflow
 
 - Use `main` as the stable branch.
 - Start each non trivial task in a new branch.
 - Use branch prefixes such as `feat/`, `fix/`, `docs/`, `chore/`, or `refactor/`.
-- Keep branch names short, specific, and readable, for example `feat/homepage-hero`, `fix/navigation-layout`, or `docs/setup-workflow`.
+- Keep branch names short and specific.
 - Do not push branches. The user handles `git push`.
 - Commit only when the user asks for it.
 - Prefer small, sequential changes over large batches.
@@ -33,19 +78,37 @@ The first expected downstream sites are for a psychologist and a writer, but the
 - When a task needs written discussion or tracking, create a task document from `docs/TASK_TEMPLATE.md`.
 - Include the pull request draft in the task document when that task document exists.
 
+## Customization approach
+
+- Prefer config and content changes before changing route components.
+- Keep client specific data in `config/`, `brief.md`, and content files before adding it to components.
+- Keep reusable section contracts stable unless the requested behavior cannot be expressed through the current configuration surface.
+- Do not duplicate site metadata, contact data, social links, or brand strings across multiple files.
+- Keep the project understandable for future AI and human edits.
+- When starting from the scaffold source, create the baseline project first and customize second.
+
+## Frontend work
+
+- This is a frontend first project. Treat layout, typography, spacing, hierarchy, and responsive behavior as product level concerns.
+- Use a design oriented frontend approach for pages, sections, and visual systems instead of shipping a purely technical baseline.
+- Prefer reusable visual tokens, section patterns, and consistent interaction states over one off styling.
+- Avoid generic placeholder looking UI when implementing real site pages.
+- When the environment provides frontend design, browser, or frontend testing skills, prefer them for implementation and verification.
+- After notable UI changes, verify the result in a browser when practical.
+
 ## Scope control
 
-- Prefer reusable structure over niche specific implementation.
-- Do not invent business rules, content sections, design language, or architecture details before they are requested.
-- When requirements are still open, prepare clean extension points instead of premature abstractions.
-- Keep the scaffold domain neutral so it can be reused for different informational websites.
+- Use the brief and config as the source of project specific decisions.
+- Do not invent business rules, content sections, or design language beyond what the brief, preset, or direct user request supports.
+- Prepare clean extension points instead of premature abstractions.
+- Keep optional systems such as CMS, analytics, database, and form delivery outside the core path unless the project specifically needs them.
 
 ## Quality expectations
 
 - Use a risk based approach tied to production impact, data handling, security, accessibility, SEO, and maintainability.
 - Cover critical paths with tests when the stack and scope justify them.
 - Match the existing conventions once the project structure is established.
-- Keep generated starter code readable and easy to modify by hand.
+- Keep starter code readable and easy to modify by hand.
 
 ## Reusable content guidance
 
@@ -56,7 +119,6 @@ The first expected downstream sites are for a psychologist and a writer, but the
 ## SEO baseline
 
 - Treat semantic HTML, metadata structure, crawlability, and social metadata as baseline concerns.
-- Avoid SEO specific implementation details that depend on a framework until the stack is chosen.
 - Leave room for per project overrides such as titles, descriptions, canonical URLs, and structured data.
 
 ## Accessibility baseline
@@ -88,11 +150,3 @@ Describe how the task was solved.
 
 List notable tradeoffs, risks, follow up work, or testing notes.
 ```
-
-## Open decisions to confirm later
-
-- Template stack and rendering model
-- Content source strategy
-- Styling approach and design system depth
-- SEO baseline and analytics requirements
-- Form handling and CMS needs

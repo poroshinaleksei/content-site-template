@@ -1,5 +1,23 @@
 # Progress
 
+## 2026-05-14
+
+- Tightened the recommended Codex prompt in `README.md` and `docs/codex-guide.md` to make the baseline first workflow more explicit.
+- Added a clearer value proposition to `README.md`, including faster project setup, lower token usage, and more consistent client project output.
+- Adjusted the `README.md` Codex section to describe the user facing workflow first and the internal Codex actions second.
+- Refined `README.md` into a cleaner product level entrypoint with a tighter Codex usage flow and clearer scope description.
+- Updated `README.md` to reflect that scaffold phase 1 is implemented and to document the current verification baseline.
+- Added explicit frontend first and design oriented rules to `AGENTS.md` and `AGENTS.template.md`.
+- Extended `pnpm setup` and `AGENTS` templating to ask for user communication language and documentation language in generated projects.
+- Tightened scaffold source instructions in `AGENTS.md`, `README.md`, and `docs/codex-guide.md` so Codex creates a runnable baseline project before deeper customization.
+- Replaced duplicated `AGENTS` text in setup with a single `AGENTS.template.md` source.
+- Updated `AGENTS.md` to work as a downstream project instruction file and taught `pnpm setup` to rewrite it with project specific identity.
+- Added localized routing for Norwegian default URLs and English `/en` URLs, including localized navigation, UI messages, metadata alternates, sitemap entries and article content folders.
+- Added theme presets for visual configuration through `config/theme.ts`, CSS variables and Tailwind tokens.
+- Added site presets in `config/presets.ts`, including a `single-childrens-book` home page composition with book sections.
+- Updated local setup and article scaffolding commands for locale aware content, site preset selection and theme preset selection.
+- Added documentation for i18n, presets, theme customization and localized content paths.
+
 ## 2026-05-13
 
 - Implemented scaffold phase 1 with Next.js App Router, React, TypeScript, Tailwind CSS, config driven pages, reusable sections, typed local MDX articles, SEO defaults, optional GA4 boundary, contact form adapter contract, setup command, article scaffolding command and starter documentation.

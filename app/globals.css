@@ -10,7 +10,12 @@
   --primary-foreground: #f8f7f2;
   --accent: #b56b3d;
   --accent-foreground: #171512;
+  --surface: #fffdf7;
+  --surface-contrast: #171512;
   --radius: 0.5rem;
+  --button-radius: 0.5rem;
+  --section-spacing-y: 5rem;
+  --container-padding-x: 1.5rem;
 }
 
 @theme inline {
@@ -23,6 +28,8 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-surface: var(--surface);
+  --color-surface-contrast: var(--surface-contrast);
   --font-sans: var(--font-sans);
   --font-serif: var(--font-serif);
   --radius-sm: calc(var(--radius) - 2px);
@@ -41,6 +48,12 @@ html {
 body {
   min-height: 100vh;
   background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+body[data-background-style="grid"] {
   background-image:
     linear-gradient(
       to right,
@@ -53,9 +66,34 @@ body {
       transparent 1px
     );
   background-size: 72px 72px;
-  color: var(--foreground);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
-  text-rendering: optimizeLegibility;
+}
+
+body[data-background-style="paper"] {
+  background-image:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, var(--surface) 75%, transparent),
+      transparent 38%
+    ),
+    repeating-linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--border) 22%, transparent) 0 1px,
+      transparent 1px 7rem
+    );
+}
+
+body[data-background-style="blocks"] {
+  background-image:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent) 16%, transparent) 0 25%,
+      transparent 25% 100%
+    ),
+    linear-gradient(
+      35deg,
+      transparent 0 68%,
+      color-mix(in srgb, var(--primary) 12%, transparent) 68% 100%
+    );
 }
 
 a {

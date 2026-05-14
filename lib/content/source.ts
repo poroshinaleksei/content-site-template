@@ -1,9 +1,13 @@
 import type { Article } from "./schemas";
+import type { Locale } from "@/config/types";
 
 export type ContentSource = {
-  getArticles: (options?: { includeDrafts?: boolean }) => Promise<Article[]>;
+  getArticles: (options: {
+    locale: Locale;
+    includeDrafts?: boolean;
+  }) => Promise<Article[]>;
   getArticleBySlug: (
     slug: string,
-    options?: { includeDrafts?: boolean },
+    options: { locale: Locale; includeDrafts?: boolean },
   ) => Promise<Article | null>;
 };

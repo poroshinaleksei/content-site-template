@@ -1,35 +1,58 @@
 import Link from "next/link";
 
+import { LanguageSwitcher } from "@/components/i18n/language-switcher";
 import { contactLinks, socialLinks } from "@/config/links";
-import { footerNavigation } from "@/config/navigation";
+import { getMessages } from "@/config/messages";
+import { getFooterNavigation } from "@/config/navigation";
 import { siteConfig } from "@/config/site";
+import type { Locale } from "@/config/types";
 import { LinkIcon } from "@/components/links/link-icon";
+import { localizedPath } from "@/lib/i18n";
 
 import { Container } from "./container";
 
-export function Footer() {
+type FooterProps = {
+  locale: Locale;
+  path: string;
+};
+
+export function Footer({ locale, path }: FooterProps) {
+  const messages = getMessages(locale);
+  const footerNavigation = getFooterNavigation(locale);
+
   return (
     <footer className="border-t border-border bg-foreground text-background">
       <Container className="grid gap-10 py-12 md:grid-cols-[1.3fr_0.7fr_0.8fr]">
         <div>
-          <Link href="/" className="font-serif text-3xl leading-tight">
+          <Link
+            href={localizedPath("/", locale)}
+            className="font-serif text-3xl leading-tight"
+          >
             {siteConfig.name}
           </Link>
           <p className="mt-4 max-w-md text-base leading-7 text-background/70">
-            {siteConfig.description}
+            {siteConfig.description[locale]}
           </p>
+          <div className="mt-6">
+            <LanguageSwitcher
+              locale={locale}
+              path={path}
+              label={messages.languageSwitcher}
+              inverted
+            />
+          </div>
         </div>
 
-        <nav aria-label="Footer navigation">
+        <nav aria-label={messages.footerNavigation}>
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-background/50">
-            Pages
+            {messages.footerNavigation}
           </p>
           <ul className="mt-4 space-y-3">
             {footerNavigation.map((item) => (
               <li key={item.href}>
                 <Link
                   className="text-background/80 hover:text-background"
-                  href={item.href}
+                  href={localizedPath(item.href, locale)}
                 >
                   {item.label}
                 </Link>
@@ -40,7 +63,7 @@ export function Footer() {
 
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-background/50">
-            Connect
+            {messages.connect}
           </p>
           <ul className="mt-4 space-y-3">
             {[...contactLinks, ...socialLinks].map((link) => (
@@ -61,7 +84,7 @@ export function Footer() {
       </Container>
       <Container className="border-t border-background/10 py-5 text-sm text-background/55">
         <p>
-          &copy; {new Date().getFullYear()} {siteConfig.owner}. All rights reserved.
+          &copy; {new Date().getFullYear()} {siteConfig.owner}. {messages.copyright}
         </p>
       </Container>
     </footer>

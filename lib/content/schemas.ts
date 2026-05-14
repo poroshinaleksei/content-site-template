@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import type { Locale } from "@/config/types";
+
 const seoSchema = z
   .object({
     title: z.string().min(1).optional(),
@@ -33,4 +35,5 @@ export type ArticleFrontmatter = z.infer<typeof articleFrontmatterSchema>;
 export type Article = ArticleFrontmatter & {
   body: string;
   filePath: string;
+  locale: Locale;
 };

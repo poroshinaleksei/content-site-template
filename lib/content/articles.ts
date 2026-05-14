@@ -3,13 +3,15 @@ import path from "node:path";
 
 import matter from "gray-matter";
 
+import type { Locale } from "@/config/types";
+
 import { articleFrontmatterSchema, type Article } from "./schemas";
 import type { ContentSource } from "./source";
 
 const articlesDirectory = path.join(process.cwd(), "content", "articles");
 
-async function readArticleFile(fileName: string): Promise<Article> {
-  const filePath = path.join(articlesDirectory, fileName);
+async function readArticleFile(locale: Locale, fileName: string): Promise<Article> {
+  const filePath = path.join(articlesDirectory, locale, fileName);
   const raw = await fs.readFile(filePath, "utf8");
   const { content, data } = matter(raw);
   const parsed = articleFrontmatterSchema.safeParse(data);
@@ -24,6 +26,7 @@ async function readArticleFile(fileName: string): Promise<Article> {
     ...parsed.data,
     body: content,
     filePath,
+    locale,
   };
 }
 
@@ -31,12 +34,15 @@ function byPublishedDateDesc(a: Article, b: Article) {
   return Date.parse(b.publishedAt) - Date.parse(a.publishedAt);
 }
 
-export async function getAllArticles(options: { includeDrafts?: boolean } = {}) {
-  const files = await fs.readdir(articlesDirectory);
+export async function getAllArticles(options: {
+  locale: Locale;
+  includeDrafts?: boolean;
+}) {
+  const files = await fs.readdir(path.join(articlesDirectory, options.locale));
   const articles = await Promise.all(
     files
       .filter((fileName) => fileName.endsWith(".mdx"))
-      .map((fileName) => readArticleFile(fileName)),
+      .map((fileName) => readArticleFile(options.locale, fileName)),
   );
 
   return articles
@@ -46,15 +52,18 @@ export async function getAllArticles(options: { includeDrafts?: boolean } = {}) 
 
 export async function getArticleBySlug(
   slug: string,
-  options: { includeDrafts?: boolean } = {},
+  options: { locale: Locale; includeDrafts?: boolean },
 ) {
-  const articles = await getAllArticles({ includeDrafts: options.includeDrafts });
+  const articles = await getAllArticles({
+    locale: options.locale,
+    includeDrafts: options.includeDrafts,
+  });
 
   return articles.find((article) => article.slug === slug) ?? null;
 }
 
-export async function getArticleSlugs() {
-  const articles = await getAllArticles();
+export async function getArticleSlugs(locale: Locale) {
+  const articles = await getAllArticles({ locale });
 
   return articles.map((article) => article.slug);
 }

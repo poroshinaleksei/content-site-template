@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { Fraunces, Source_Sans_3 } from "next/font/google";
 
 import { Analytics } from "@/components/analytics/google-analytics";
-import { Footer } from "@/components/layout/footer";
-import { Header } from "@/components/layout/header";
 import { JsonLd } from "@/components/seo/json-ld";
 import { siteConfig } from "@/config/site";
+import { isLocale } from "@/lib/i18n";
 import { createMetadata } from "@/lib/seo/metadata";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
+import { getThemeAttributes, getThemeStyle } from "@/lib/theme";
 
 import "./globals.css";
 
@@ -26,25 +26,31 @@ const serif = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   ...createMetadata({
-    title: siteConfig.defaultSeo.title,
-    description: siteConfig.defaultSeo.description,
+    title: siteConfig.defaultSeo[siteConfig.defaultLocale].title,
+    description: siteConfig.defaultSeo[siteConfig.defaultLocale].description,
     path: "/",
+    locale: siteConfig.defaultLocale,
   }),
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ locale?: string }>;
 }>) {
+  const resolvedParams = await params;
+  const locale = isLocale(resolvedParams.locale)
+    ? resolvedParams.locale
+    : siteConfig.defaultLocale;
+
   return (
-    <html lang={siteConfig.locale} className={`${sans.variable} ${serif.variable}`}>
-      <body>
-        <JsonLd data={websiteJsonLd()} />
-        <JsonLd data={organizationJsonLd()} />
-        <Header />
+    <html lang={locale} className={`${sans.variable} ${serif.variable}`}>
+      <body style={getThemeStyle()} {...getThemeAttributes()}>
+        <JsonLd data={websiteJsonLd(locale)} />
+        <JsonLd data={organizationJsonLd(locale)} />
         {children}
-        <Footer />
         <Analytics />
       </body>
     </html>

@@ -4,18 +4,49 @@ This template is designed to be changed through a small number of files.
 
 ## Brand and site data
 
-Edit `config/site.ts` for the site name, owner, description, production URL, locale and
-default SEO image.
+Edit `config/site.ts` for the site name, owner, production URL, active site preset,
+locales, localized description and default SEO image.
 
-Use `config/theme.ts` for color and typography notes. The active Tailwind tokens live in
-`app/globals.css`, so update both files when a real project needs a changed visual system.
+Choose the active visual preset in `config/theme.ts` with `themePreset`.
+
+Supported theme presets:
+
+- `nordic-warm`
+- `minimal`
+- `playful`
+- `editorial`
+
+Theme presets define colors, border radius, typography style, background style, spacing
+density and button style. Components consume these values through CSS variables and
+Tailwind tokens.
+
+## Site presets
+
+Choose the active site preset in `config/site.ts` with `siteType`.
+
+Supported site presets:
+
+- `single-childrens-book`
+- `writer-author`
+- `psychologist`
+- `small-business`
+
+Preset metadata and page overrides live in `config/presets.ts`. Use
+`docs/presets-guide.md` when changing preset behavior.
+
+## Languages
+
+The default locale is `nb` and uses unprefixed URLs. English uses `/en`.
+
+Use `docs/i18n-guide.md` for route structure, localized content paths and SEO alternate
+rules.
 
 ## Navigation
 
 Edit `config/navigation.ts`.
 
-Header and footer navigation are separate arrays. Use internal paths for local pages and
-set `external: true` only for external destinations.
+Header and footer navigation are locale aware. Use internal paths for local pages and set
+`external: true` only for external destinations.
 
 ## Links and profiles
 
@@ -44,13 +75,21 @@ Supported section types in v1:
 - `faq` (contract only)
 - `cta`
 - `contact-form`
+- `book-hero`
+- `book-intro`
+- `book-details`
+- `illustration-gallery`
+- `where-to-buy`
+- `for-parents`
+- `author-bio`
 
 ## Articles
 
-Add articles in `content/articles/`.
+Add articles in `content/articles/<locale>/`.
 
 ```bash
 pnpm new:article "Article title"
+pnpm new:article -- --locale en "English article title"
 ```
 
 Draft articles are excluded from public lists and generated article paths while

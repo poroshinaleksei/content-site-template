@@ -4,8 +4,10 @@
 
 - Site name:
 - Owner or brand:
-- Site type:
-- Short description:
+- Site preset:
+- Theme preset:
+- Short description, Norwegian:
+- Short description, English:
 - Expected domain:
 - Launch target:
 

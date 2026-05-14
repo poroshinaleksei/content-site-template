@@ -1,5 +1,9 @@
 import { contactLinks, socialLinks } from "@/config/links";
-import type { ContactFormSection as ContactFormSectionConfig } from "@/config/types";
+import { getMessages } from "@/config/messages";
+import type {
+  ContactFormSection as ContactFormSectionConfig,
+  Locale,
+} from "@/config/types";
 import { Button } from "@/components/ui/button";
 import { LinkList } from "@/components/links/link-list";
 
@@ -7,9 +11,12 @@ import { SectionShell } from "./section-shell";
 
 type ContactFormSectionProps = {
   section: ContactFormSectionConfig;
+  locale: Locale;
 };
 
-export function ContactFormSection({ section }: ContactFormSectionProps) {
+export function ContactFormSection({ section, locale }: ContactFormSectionProps) {
+  const messages = getMessages(locale);
+
   return (
     <SectionShell className="pt-0">
       <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
@@ -23,7 +30,7 @@ export function ContactFormSection({ section }: ContactFormSectionProps) {
           <div className="mt-8 space-y-6">
             <div>
               <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-                Contact
+                {messages.contactSection}
               </h3>
               <div className="mt-3">
                 <LinkList links={contactLinks} />
@@ -31,7 +38,7 @@ export function ContactFormSection({ section }: ContactFormSectionProps) {
             </div>
             <div>
               <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-                Social
+                {messages.social}
               </h3>
               <div className="mt-3">
                 <LinkList links={socialLinks} />
@@ -44,10 +51,10 @@ export function ContactFormSection({ section }: ContactFormSectionProps) {
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="sm:col-span-2">
               <label className="text-sm font-semibold text-foreground" htmlFor="name">
-                Name
+                {messages.name}
               </label>
               <input
-                className="mt-2 min-h-11 w-full rounded-md border border-border bg-background px-3 text-foreground"
+                className="mt-2 min-h-11 w-full rounded-md border border-border bg-surface px-3 text-foreground"
                 id="name"
                 name="name"
                 type="text"
@@ -57,10 +64,10 @@ export function ContactFormSection({ section }: ContactFormSectionProps) {
             </div>
             <div>
               <label className="text-sm font-semibold text-foreground" htmlFor="email">
-                Email
+                {messages.email}
               </label>
               <input
-                className="mt-2 min-h-11 w-full rounded-md border border-border bg-background px-3 text-foreground"
+                className="mt-2 min-h-11 w-full rounded-md border border-border bg-surface px-3 text-foreground"
                 id="email"
                 name="email"
                 type="email"
@@ -70,10 +77,10 @@ export function ContactFormSection({ section }: ContactFormSectionProps) {
             </div>
             <div>
               <label className="text-sm font-semibold text-foreground" htmlFor="phone">
-                Phone
+                {messages.phone}
               </label>
               <input
-                className="mt-2 min-h-11 w-full rounded-md border border-border bg-background px-3 text-foreground"
+                className="mt-2 min-h-11 w-full rounded-md border border-border bg-surface px-3 text-foreground"
                 id="phone"
                 name="phone"
                 type="tel"
@@ -82,10 +89,10 @@ export function ContactFormSection({ section }: ContactFormSectionProps) {
             </div>
             <div className="sm:col-span-2">
               <label className="text-sm font-semibold text-foreground" htmlFor="message">
-                Message
+                {messages.message}
               </label>
               <textarea
-                className="mt-2 min-h-36 w-full rounded-md border border-border bg-background px-3 py-3 text-foreground"
+                className="mt-2 min-h-36 w-full rounded-md border border-border bg-surface px-3 py-3 text-foreground"
                 id="message"
                 name="message"
                 required
@@ -93,10 +100,10 @@ export function ContactFormSection({ section }: ContactFormSectionProps) {
             </div>
           </div>
           <p className="mt-4 text-sm leading-6 text-muted-foreground">
-            This starter does not send messages until a form adapter is configured.
+            {messages.formDisabledNote}
           </p>
           <Button className="mt-6" type="submit" disabled>
-            Sending disabled
+            {messages.sendingDisabled}
           </Button>
         </form>
       </div>
