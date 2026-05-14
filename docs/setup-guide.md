@@ -1,7 +1,32 @@
 # Setup guide
 
-Use the generator when creating a new downstream site project from this scaffold. Use
-`pnpm setup` only after the scaffold files already exist in the target project.
+Use the launcher or generator when creating a new downstream site project from this
+scaffold. Use `pnpm setup` only after the scaffold files already exist in the target
+project.
+
+## Launcher flow
+
+Use the launcher when starting from a clean local folder and a GitHub scaffold reference.
+
+```bash
+npx create-content-site my-site
+npm create content-site@latest my-site
+npx create-content-site my-site --scaffold https://github.com/owner/repo
+npx create-content-site my-site --scaffold https://github.com/owner/repo --ref main
+```
+
+The launcher:
+
+- accepts the target directory and launcher options
+- resolves a GitHub scaffold archive URL
+- downloads and extracts the archive into a temporary directory
+- calls the scaffold copy's `scripts/generate-site.mjs`
+
+It downloads an archive instead of running `git clone`. It does not own setup questions,
+config generation, dependency install, or verification.
+
+For private scaffold repositories, run the launcher with `GITHUB_TOKEN` or `GH_TOKEN`
+available in the environment. The token needs read access to the scaffold repository.
 
 ## Generator flow
 
@@ -20,6 +45,7 @@ node /path/to/website-template/scripts/generate-site.mjs .
 The generator:
 
 - copies this scaffold into the target directory
+- skips the launcher package, local artifacts, and dependency output
 - skips `.git`, `node_modules`, `.next`, build output, cache files, logs and local env files
 - runs the shared setup question flow in the generated project
 - writes `AGENTS.md`, `brief.md`, and the main config files

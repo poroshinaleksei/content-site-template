@@ -2,6 +2,8 @@
 
 ## 2026-05-14
 
+- Added the `create-content-site` launcher package for `npx` style bootstrap through GitHub archive download and generator delegation.
+- Added a task document for the `npx` style bootstrap direction and aligned it around a published launcher package instead of an in repository only bootstrap helper.
 - Removed outdated `phase 1` and standalone generator wording from the public docs, and aligned future planning around the in repository generator flow.
 - Clarified the `README.md` generator workflow so Codex and the in repository generator have explicit roles around setup questions, defaults, and baseline first execution.
 - Added the in repository site project generator entry point and shared setup core used by both `pnpm setup` and `pnpm generate:site`.

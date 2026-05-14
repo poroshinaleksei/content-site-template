@@ -8,6 +8,7 @@ This plan covers the implemented scaffold baseline and the remaining in reposito
 
 The scaffold should support the following workflow:
 
+- create a new downstream project through a small `npx` launcher
 - create a new repository from the GitHub template
 - run a project setup flow after repository creation
 - run the project locally immediately
@@ -62,8 +63,10 @@ Generator and setup roadmap:
 
 - keep the generator inside this scaffold repository
 - reuse one shared question and output contract between `pnpm generate:site` and `pnpm setup`
+- use a small publishable launcher package for create app style bootstrap
+- keep the launcher limited to argument parsing, GitHub archive download, extraction, and generator delegation
 - improve the in repository generator flow when new downstream project needs appear
-- avoid splitting the flow into a separate package unless repository specific constraints stop being true
+- avoid moving setup prompts, config generation, install, or verification into the launcher
 
 ### Project architecture
 
