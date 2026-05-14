@@ -76,14 +76,20 @@ Use an explicit GitHub scaffold source when Codex should reference this reposito
 fork:
 
 ```bash
-npx create-content-site my-site --scaffold https://github.com/owner/repo
-npx create-content-site my-site --scaffold https://github.com/owner/repo --ref main
-npm create content-site@latest my-site -- --scaffold https://github.com/owner/repo
+npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/content-site-template
+npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/content-site-template --ref main
+npm create content-site@latest my-site -- --scaffold https://github.com/poroshinaleksei/content-site-template
 ```
 
 The launcher uses GitHub archive download, not `git clone`. It is a thin bootstrap layer.
 Setup questions, config generation, dependency install, and verification still live in
 the scaffold generator.
+
+The default launcher source is:
+
+```text
+https://github.com/poroshinaleksei/content-site-template
+```
 
 For private scaffold repositories, run the launcher with `GITHUB_TOKEN` or `GH_TOKEN`
 available in the environment. The token needs read access to the scaffold repository.
@@ -227,7 +233,7 @@ cd packages/create-content-site
 npm pack
 mkdir -p /tmp/create-content-site-check
 cd /tmp/create-content-site-check
-npx /path/to/create-content-site-0.1.0.tgz my-site --skip-install
+npx /path/to/create-content-site-*.tgz my-site --skip-install
 cd /path/to/website-template/packages/create-content-site
 npm login
 npm publish --access public

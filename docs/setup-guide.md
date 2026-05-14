@@ -11,8 +11,8 @@ Use the launcher when starting from a clean local folder and a GitHub scaffold r
 ```bash
 npx create-content-site my-site
 npm create content-site@latest my-site
-npx create-content-site my-site --scaffold https://github.com/owner/repo
-npx create-content-site my-site --scaffold https://github.com/owner/repo --ref main
+npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/content-site-template
+npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/content-site-template --ref main
 ```
 
 The launcher:

@@ -17,8 +17,14 @@ available in the environment. The token needs read access to the scaffold reposi
 ```bash
 npx create-content-site my-site
 npm create content-site@latest my-site
-npx create-content-site my-site --scaffold https://github.com/owner/repo
-npx create-content-site my-site --scaffold https://github.com/owner/repo --ref main
+npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/content-site-template
+npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/content-site-template --ref main
+```
+
+The default `npx create-content-site my-site` flow downloads the scaffold from:
+
+```text
+https://github.com/poroshinaleksei/content-site-template
 ```
 
 Useful delegated options:
@@ -44,7 +50,7 @@ cd packages/create-content-site
 npm pack
 mkdir -p /tmp/create-content-site-check
 cd /tmp/create-content-site-check
-npx /path/to/create-content-site-0.1.0.tgz my-site --skip-install
+npx /path/to/create-content-site-*.tgz my-site --skip-install
 cd /path/to/website-template/packages/create-content-site
 ```
 
