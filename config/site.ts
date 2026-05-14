@@ -4,6 +4,7 @@ export const siteConfig = {
   name: "Website template",
   owner: "Site owner",
   url: "https://example.com",
+  siteType: "small-business",
   defaultLocale: "nb",
   locales: ["nb", "en"],
   localeLabels: {

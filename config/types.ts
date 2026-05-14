@@ -13,6 +13,7 @@ export type SiteConfig = {
   name: string;
   owner: string;
   url: string;
+  siteType: SitePreset;
   defaultLocale: Locale;
   locales: Locale[];
   localeLabels: Localized<string>;
@@ -23,6 +24,12 @@ export type SiteConfig = {
     }
   >;
 };
+
+export type SitePreset =
+  | "single-childrens-book"
+  | "writer-author"
+  | "psychologist"
+  | "small-business";
 
 export type NavigationItem = {
   label: string;
@@ -144,6 +151,52 @@ export type CtaSection = SectionBase<"cta"> & {
 
 export type ContactFormSection = SectionBase<"contact-form">;
 
+export type BookHeroSection = SectionBase<"book-hero"> & {
+  badge?: string;
+  coverImage?: string;
+  primaryAction?: NavigationItem;
+  secondaryAction?: NavigationItem;
+};
+
+export type BookIntroSection = SectionBase<"book-intro"> & {
+  quote?: string;
+};
+
+export type BookDetailsSection = SectionBase<"book-details"> & {
+  details: Array<{
+    label: string;
+    value: string;
+  }>;
+};
+
+export type IllustrationGallerySection = SectionBase<"illustration-gallery"> & {
+  images: Array<{
+    src: string;
+    alt: string;
+    caption?: string;
+  }>;
+};
+
+export type WhereToBuySection = SectionBase<"where-to-buy"> & {
+  links: Array<{
+    label: string;
+    href: string;
+    description?: string;
+  }>;
+};
+
+export type ForParentsSection = SectionBase<"for-parents"> & {
+  points: Array<{
+    title: string;
+    description: string;
+  }>;
+};
+
+export type AuthorBioSection = SectionBase<"author-bio"> & {
+  image?: string;
+  links?: NavigationItem[];
+};
+
 export type PageSection =
   | HeroSection
   | AboutSection
@@ -152,7 +205,16 @@ export type PageSection =
   | TestimonialsSection
   | FaqSection
   | CtaSection
-  | ContactFormSection;
+  | ContactFormSection
+  | BookHeroSection
+  | BookIntroSection
+  | BookDetailsSection
+  | IllustrationGallerySection
+  | WhereToBuySection
+  | ForParentsSection
+  | AuthorBioSection;
+
+export type PageKey = "home" | "about" | "articles" | "contact";
 
 export type PageConfig = {
   title: string;
@@ -160,4 +222,13 @@ export type PageConfig = {
   slug: string;
   seo?: SeoConfig;
   sections: PageSection[];
+};
+
+export type SitePresetConfig = {
+  label: string;
+  description: string;
+  pages: PageKey[];
+  sections: string[];
+  expectedData: string[];
+  pageOverrides?: Partial<Record<PageKey, Localized<PageConfig>>>;
 };

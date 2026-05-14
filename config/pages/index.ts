@@ -7,9 +7,9 @@ import { aboutPageConfig } from "./about";
 import { articlesPageConfig } from "./articles";
 import { contactPageConfig } from "./contact";
 import { homePageConfig } from "./home";
-import type { Locale } from "../types";
-
-export type PageKey = "home" | "about" | "articles" | "contact";
+import { presetRegistry } from "../presets";
+import { siteConfig } from "../site";
+import type { Locale, PageKey } from "../types";
 
 export const pageConfigs = {
   home: homePageConfig,
@@ -19,5 +19,8 @@ export const pageConfigs = {
 };
 
 export function getPageConfig(page: PageKey, locale: Locale) {
-  return pageConfigs[page][locale];
+  return (
+    presetRegistry[siteConfig.siteType].pageOverrides?.[page]?.[locale] ??
+    pageConfigs[page][locale]
+  );
 }

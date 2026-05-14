@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200" role="img" aria-label="Book cover placeholder">
+  <rect width="900" height="1200" rx="36" fill="#fff7df"/>
+  <rect x="70" y="70" width="760" height="1060" rx="28" fill="#0d6b6c"/>
+  <circle cx="680" cy="250" r="96" fill="#e05f3e"/>
+  <path d="M170 780c80-170 180-255 300-255s220 85 300 255v180H170V780Z" fill="#f8e8ba"/>
+  <path d="M250 860c40-80 95-120 165-120s125 40 165 120" fill="none" stroke="#1f1a13" stroke-width="26" stroke-linecap="round"/>
+  <text x="450" y="405" text-anchor="middle" fill="#fffaf0" font-family="Georgia, serif" font-size="72" font-weight="700">Book title</text>
+  <text x="450" y="485" text-anchor="middle" fill="#fffaf0" font-family="Arial, sans-serif" font-size="34">cover placeholder</text>
+</svg>
