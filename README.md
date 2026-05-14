@@ -98,7 +98,10 @@ Recommended user flow:
 Short Codex prompt example:
 
 ```text
-Use npx create-content-site with this GitHub scaffold URL to create a new site project in this folder. Ask only the setup questions needed for the baseline, use scaffold defaults where possible, get the site runnable locally, and do not start deeper customization until the baseline project is ready.
+Use npx create-content-site with this GitHub scaffold URL to create a new site project
+in this folder. Ask only the setup questions needed for the baseline, use scaffold
+defaults where possible, get the site runnable locally, and do not start deeper
+customization until the baseline project is ready.
 ```
 
 Codex should keep client specific work in `brief.md`, `config/`, and `content/` first.
