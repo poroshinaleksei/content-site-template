@@ -151,8 +151,41 @@ export type CtaSection = SectionBase<"cta"> & {
 
 export type ContactFormSection = SectionBase<"contact-form">;
 
+export type BookProfile = {
+  title: string;
+  subtitle?: string;
+  author: string;
+  illustrator?: string;
+  publisher?: string;
+  isbn?: string;
+  ageRange?: string;
+  language?: string;
+  format?: string;
+  pageCount?: string;
+  coverImage?: string;
+  illustrationImages?: Array<{
+    src: string;
+    alt: string;
+    caption?: string;
+  }>;
+  shortDescription?: string;
+  themes?: string[];
+  retailerLinks?: Array<{
+    label: string;
+    href: string;
+    description?: string;
+  }>;
+  pressLinks?: Array<{
+    label: string;
+    href: string;
+    description?: string;
+  }>;
+  contactLinks?: NavigationItem[];
+};
+
 export type BookHeroSection = SectionBase<"book-hero"> & {
   badge?: string;
+  book?: BookProfile;
   coverImage?: string;
   primaryAction?: NavigationItem;
   secondaryAction?: NavigationItem;
@@ -185,14 +218,22 @@ export type WhereToBuySection = SectionBase<"where-to-buy"> & {
   }>;
 };
 
-export type ForParentsSection = SectionBase<"for-parents"> & {
+export type PressLinksSection = SectionBase<"press-links"> & {
+  links: Array<{
+    label: string;
+    href: string;
+    description?: string;
+  }>;
+};
+
+export type ForParentsSection = SectionBase<"for-parents" | "for-kindergarten"> & {
   points: Array<{
     title: string;
     description: string;
   }>;
 };
 
-export type AuthorBioSection = SectionBase<"author-bio"> & {
+export type AuthorBioSection = SectionBase<"author-bio" | "illustrator-bio"> & {
   image?: string;
   links?: NavigationItem[];
 };
@@ -211,6 +252,7 @@ export type PageSection =
   | BookDetailsSection
   | IllustrationGallerySection
   | WhereToBuySection
+  | PressLinksSection
   | ForParentsSection
   | AuthorBioSection;
 

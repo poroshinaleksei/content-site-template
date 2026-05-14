@@ -36,6 +36,9 @@ The launcher downloads the scaffold as a GitHub archive, extracts it into a temp
 directory, and then runs the scaffold's `scripts/generate-site.mjs`. It does not use
 `git clone`.
 
+When repeatability matters, prefer a stable scaffold tag with `--ref vX.Y.Z` once
+releases exist. Use `main` only for active scaffold development and smoke testing.
+
 The scaffold repository remains the source of truth. The launcher must stay a thin
 bootstrap layer and must not duplicate setup prompts, config generation, install, or
 verification behavior.

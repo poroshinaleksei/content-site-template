@@ -15,6 +15,9 @@ npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/co
 npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/content-site-template --ref main
 ```
 
+Use `--ref vX.Y.Z` for production scaffolds once tagged releases exist. Use `main` for
+active scaffold development and smoke testing.
+
 The launcher:
 
 - accepts the target directory and launcher options

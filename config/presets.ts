@@ -13,6 +13,49 @@ const singleChildrensBookHome = {
         badge: "For høytlesning",
         title: "Boktittel kommer her",
         body: "En varm introduksjon til boken, temaet og hvorfor historien passer for barn og voksne som leser sammen.",
+        book: {
+          title: "Boktittel kommer her",
+          subtitle: "Undertittel eller kort løfte",
+          author: "Forfatternavn",
+          illustrator: "Illustratørnavn",
+          publisher: "Forlag",
+          isbn: "978-82-000-0000-0",
+          ageRange: "3 til 7 år",
+          language: "Norsk",
+          format: "Innbundet",
+          pageCount: "32 sider",
+          coverImage: "/images/book-cover-placeholder.svg",
+          illustrationImages: [
+            {
+              src: "/images/illustration-placeholder.svg",
+              alt: "Illustrasjon fra boken",
+              caption: "Kort bildetekst",
+            },
+          ],
+          shortDescription:
+            "En kort beskrivelse av historien, temaene og hvem boken passer for.",
+          themes: ["vennskap", "følelser", "nysgjerrighet"],
+          retailerLinks: [
+            {
+              label: "Norli",
+              href: "https://example.com",
+              description: "Bytt ut med direkte kjøpslenke.",
+            },
+            {
+              label: "Ark",
+              href: "https://example.com",
+              description: "Bytt ut med direkte kjøpslenke.",
+            },
+          ],
+          pressLinks: [
+            {
+              label: "Presseomtale",
+              href: "https://example.com",
+              description: "Legg inn presse, anmeldelse eller intervju.",
+            },
+          ],
+          contactLinks: [{ label: "Kontakt", href: "/contact" }],
+        },
         coverImage: "/images/book-cover-placeholder.svg",
         primaryAction: { label: "Hvor kan den kjøpes", href: "#where-to-buy" },
         secondaryAction: { label: "Om forfatteren", href: "#author" },
@@ -29,9 +72,15 @@ const singleChildrensBookHome = {
         type: "book-details",
         title: "Bokdetaljer",
         details: [
+          { label: "Tittel", value: "Boktittel kommer her" },
+          { label: "Forfatter", value: "Forfatternavn" },
+          { label: "Illustratør", value: "Illustratørnavn" },
+          { label: "Forlag", value: "Forlag" },
+          { label: "ISBN", value: "978-82-000-0000-0" },
           { label: "Alder", value: "3 til 7 år" },
-          { label: "Format", value: "Innbundet eller digital" },
-          { label: "Språk", value: "Norsk og engelsk" },
+          { label: "Format", value: "Innbundet" },
+          { label: "Språk", value: "Norsk" },
+          { label: "Omfang", value: "32 sider" },
         ],
       },
       {
@@ -54,7 +103,17 @@ const singleChildrensBookHome = {
         body: "Bruk strukturerte kjøpslenker i stedet for hardkodede knapper i komponentene.",
         links: [
           {
-            label: "Bokhandel",
+            label: "Norli",
+            href: "https://example.com",
+            description: "Bytt ut med direkte kjøpslenke.",
+          },
+          {
+            label: "Ark",
+            href: "https://example.com",
+            description: "Bytt ut med direkte kjøpslenke.",
+          },
+          {
+            label: "Lokal bokhandel",
             href: "https://example.com",
             description: "Legg inn lenke til valgt forhandler.",
           },
@@ -76,11 +135,49 @@ const singleChildrensBookHome = {
         ],
       },
       {
+        id: "for-kindergarten",
+        type: "for-kindergarten",
+        title: "For barnehage og høytlesning",
+        body: "Vis hvordan boken kan brukes i samlingsstund, temaarbeid eller lesestund.",
+        points: [
+          {
+            title: "Tema for samtale",
+            description: "Knytt boken til følelser, vennskap eller nysgjerrighet.",
+          },
+          {
+            title: "Praktisk bruk",
+            description:
+              "Legg inn alder, varighet og forslag til aktivitet etter lesing.",
+          },
+        ],
+      },
+      {
         id: "author",
         type: "author-bio",
         title: "Om forfatteren",
         body: "Kort forfatterbio med plass til bakgrunn, motivasjon og relevante lenker.",
         links: [{ label: "Kontakt", href: "/contact" }],
+      },
+      {
+        id: "illustrator",
+        type: "illustrator-bio",
+        title: "Om illustratøren",
+        body: "Kort illustratørbio. Deaktiver denne seksjonen hvis boken ikke har egen illustratørpresentasjon.",
+        enabled: false,
+      },
+      {
+        id: "press",
+        type: "press-links",
+        title: "Presse og omtale",
+        body: "Legg inn anmeldelser, intervjuer eller nedlastbare pressebilder når de finnes.",
+        enabled: false,
+        links: [
+          {
+            label: "Presseomtale",
+            href: "https://example.com",
+            description: "Bytt ut med relevant lenke.",
+          },
+        ],
       },
       {
         id: "contact",
@@ -102,6 +199,49 @@ const singleChildrensBookHome = {
         badge: "For reading aloud",
         title: "Book title goes here",
         body: "A warm introduction to the book, its theme, and why the story works for children and adults reading together.",
+        book: {
+          title: "Book title goes here",
+          subtitle: "Subtitle or short promise",
+          author: "Author name",
+          illustrator: "Illustrator name",
+          publisher: "Publisher",
+          isbn: "978-82-000-0000-0",
+          ageRange: "3 to 7 years",
+          language: "Norwegian",
+          format: "Hardcover",
+          pageCount: "32 pages",
+          coverImage: "/images/book-cover-placeholder.svg",
+          illustrationImages: [
+            {
+              src: "/images/illustration-placeholder.svg",
+              alt: "Illustration from the book",
+              caption: "Short image caption",
+            },
+          ],
+          shortDescription:
+            "A short description of the story, themes, and intended readers.",
+          themes: ["friendship", "feelings", "curiosity"],
+          retailerLinks: [
+            {
+              label: "Norli",
+              href: "https://example.com",
+              description: "Replace with a direct purchase link.",
+            },
+            {
+              label: "Ark",
+              href: "https://example.com",
+              description: "Replace with a direct purchase link.",
+            },
+          ],
+          pressLinks: [
+            {
+              label: "Press mention",
+              href: "https://example.com",
+              description: "Add press, review, or interview links.",
+            },
+          ],
+          contactLinks: [{ label: "Contact", href: "/contact" }],
+        },
         coverImage: "/images/book-cover-placeholder.svg",
         primaryAction: { label: "Where to buy", href: "#where-to-buy" },
         secondaryAction: { label: "About the author", href: "#author" },
@@ -118,9 +258,15 @@ const singleChildrensBookHome = {
         type: "book-details",
         title: "Book details",
         details: [
+          { label: "Title", value: "Book title goes here" },
+          { label: "Author", value: "Author name" },
+          { label: "Illustrator", value: "Illustrator name" },
+          { label: "Publisher", value: "Publisher" },
+          { label: "ISBN", value: "978-82-000-0000-0" },
           { label: "Age", value: "3 to 7 years" },
-          { label: "Format", value: "Hardcover or digital" },
-          { label: "Languages", value: "Norwegian and English" },
+          { label: "Format", value: "Hardcover" },
+          { label: "Language", value: "Norwegian" },
+          { label: "Length", value: "32 pages" },
         ],
       },
       {
@@ -143,7 +289,17 @@ const singleChildrensBookHome = {
         body: "Use structured purchase links instead of hardcoded buttons in components.",
         links: [
           {
-            label: "Bookshop",
+            label: "Norli",
+            href: "https://example.com",
+            description: "Replace with a direct purchase link.",
+          },
+          {
+            label: "Ark",
+            href: "https://example.com",
+            description: "Replace with a direct purchase link.",
+          },
+          {
+            label: "Local bookshop",
             href: "https://example.com",
             description: "Add a link to the preferred retailer.",
           },
@@ -165,11 +321,48 @@ const singleChildrensBookHome = {
         ],
       },
       {
+        id: "for-kindergarten",
+        type: "for-kindergarten",
+        title: "For kindergarten and reading aloud",
+        body: "Show how the book can be used for group reading, theme work, or quiet reading moments.",
+        points: [
+          {
+            title: "Conversation theme",
+            description: "Connect the book to feelings, friendship, or curiosity.",
+          },
+          {
+            title: "Practical use",
+            description: "Add age, reading time, and a suggested activity after reading.",
+          },
+        ],
+      },
+      {
         id: "author",
         type: "author-bio",
         title: "About the author",
         body: "Short author bio with room for background, motivation, and relevant links.",
         links: [{ label: "Contact", href: "/contact" }],
+      },
+      {
+        id: "illustrator",
+        type: "illustrator-bio",
+        title: "About the illustrator",
+        body: "Short illustrator bio. Disable this section if the book does not need a separate illustrator presentation.",
+        enabled: false,
+      },
+      {
+        id: "press",
+        type: "press-links",
+        title: "Press and reviews",
+        body: "Add reviews, interviews, or downloadable press images when available.",
+        enabled: false,
+        links: [
+          {
+            label: "Press mention",
+            href: "https://example.com",
+            description: "Replace with a relevant link.",
+          },
+        ],
       },
       {
         id: "contact",
@@ -193,17 +386,31 @@ export const presetRegistry: Record<SitePreset, SitePresetConfig> = {
       "IllustrationGallery",
       "WhereToBuy",
       "ForParents",
+      "ForKindergarten",
       "AuthorBio",
+      "IllustratorBio",
+      "PressLinks",
       "Contact",
     ],
     expectedData: [
       "Book title",
+      "Subtitle",
       "Book description",
+      "Author",
+      "Illustrator",
+      "Publisher",
+      "ISBN",
       "Cover image",
       "Illustrations",
       "Purchase links",
+      "Press or review links",
       "Age range",
+      "Language",
+      "Format",
+      "Page count",
+      "Themes",
       "Author bio",
+      "Illustrator bio",
       "Contact details",
     ],
     pageOverrides: {

@@ -20,6 +20,19 @@ Theme presets define colors, border radius, typography style, background style, 
 density and button style. Components consume these values through CSS variables and
 Tailwind tokens.
 
+Theme fit:
+
+- `nordic-warm`: calm editorial sites, consultants, psychologists and general service
+  sites.
+- `minimal`: restrained professional sites where content and typography should stay
+  quiet.
+- `playful`: children's books, creative work and sites that can use warmer accents and
+  more space.
+- `editorial`: writer, author and essay driven sites with a stronger publication feel.
+
+Keep theme presets as starting points. For client work, adjust tokens in
+`config/theme.ts` before hardcoding colors in reusable components.
+
 ## Site presets
 
 Choose the active site preset in `config/site.ts` with `siteType`.
@@ -81,7 +94,10 @@ Supported section types in v1:
 - `illustration-gallery`
 - `where-to-buy`
 - `for-parents`
+- `for-kindergarten`
 - `author-bio`
+- `illustrator-bio`
+- `press-links`
 
 ## Articles
 
