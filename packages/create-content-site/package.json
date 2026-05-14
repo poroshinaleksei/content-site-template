@@ -1,8 +1,17 @@
 {
   "name": "create-content-site",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create a downstream content site project from the content site scaffold.",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poroshinaleksei/content-site-template.git",
+    "directory": "packages/create-content-site"
+  },
+  "homepage": "https://github.com/poroshinaleksei/content-site-template/tree/main/packages/create-content-site",
+  "bugs": {
+    "url": "https://github.com/poroshinaleksei/content-site-template/issues"
+  },
   "bin": {
     "create-content-site": "bin/create-content-site.js"
   },
