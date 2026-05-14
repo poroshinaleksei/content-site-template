@@ -6,9 +6,11 @@ Use this guide when adapting the template with Codex.
 
 1. `brief.md`, when it exists.
 2. `config/site.ts`
-3. `config/pages/`
-4. `config/links.ts`
-5. `content/articles/`
+3. `config/theme.ts`
+4. `config/presets.ts`
+5. `config/pages/`
+6. `config/links.ts`
+7. `content/articles/`
 
 If `brief.md` does not exist, start from `brief.example.md` or run `pnpm setup`.
 
@@ -16,8 +18,10 @@ If `brief.md` does not exist, start from `brief.example.md` or run `pnpm setup`.
 
 Change config and content before changing route components.
 
-Use page composition files for section order, labels and copy. Use `config/links.ts` for
-contact destinations and social profiles. Use MDX files for article content.
+Use `config/site.ts` for active locale, preset and site metadata. Use `config/theme.ts`
+for visual preset changes. Use page composition files for section order, labels and copy.
+Use `config/links.ts` for contact destinations and social profiles. Use localized MDX
+files for article content.
 
 ## What to avoid
 
@@ -26,6 +30,7 @@ contact destinations and social profiles. Use MDX files for article content.
 - Do not add CMS, analytics, database or form provider code to the core path unless the
   project specifically needs it.
 - Do not make a niche page model in this template repository.
+- Do not hardcode language dependent UI text in components.
 
 ## Quality checks
 

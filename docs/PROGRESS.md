@@ -1,5 +1,13 @@
 # Progress
 
+## 2026-05-14
+
+- Added localized routing for Norwegian default URLs and English `/en` URLs, including localized navigation, UI messages, metadata alternates, sitemap entries and article content folders.
+- Added theme presets for visual configuration through `config/theme.ts`, CSS variables and Tailwind tokens.
+- Added site presets in `config/presets.ts`, including a `single-childrens-book` home page composition with book sections.
+- Updated local setup and article scaffolding commands for locale aware content, site preset selection and theme preset selection.
+- Added documentation for i18n, presets, theme customization and localized content paths.
+
 ## 2026-05-13
 
 - Implemented scaffold phase 1 with Next.js App Router, React, TypeScript, Tailwind CSS, config driven pages, reusable sections, typed local MDX articles, SEO defaults, optional GA4 boundary, contact form adapter contract, setup command, article scaffolding command and starter documentation.

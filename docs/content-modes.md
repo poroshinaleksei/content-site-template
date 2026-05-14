@@ -4,8 +4,8 @@
 
 Local MDX is the default mode in v1.
 
-Articles live in `content/articles/*.mdx`. Frontmatter is parsed with `gray-matter` and
-validated with `zod` in `lib/content/schemas.ts`.
+Articles live in `content/articles/<locale>/*.mdx`. Frontmatter is parsed with
+`gray-matter` and validated with `zod` in `lib/content/schemas.ts`.
 
 Public article routes use `lib/content/articles.ts`. Route files should not parse content
 directly.
@@ -14,8 +14,9 @@ directly.
 
 Decap CMS is not active in the base scaffold.
 
-The content paths and frontmatter fields are compatible with a future Decap setup. A later
-integration can add `/admin` and Decap collection config without moving article files.
+The localized content paths and frontmatter fields are compatible with a future Decap
+setup. A later integration can add `/admin` and Decap collection config without moving
+article files.
 
 ## Headless CMS mode
 
