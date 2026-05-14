@@ -16,8 +16,8 @@ function usage() {
 
 Usage:
   npx create-content-site <target-directory>
-  npx create-content-site <target-directory> --scaffold https://github.com/owner/repo
-  npx create-content-site <target-directory> --scaffold https://github.com/owner/repo --ref main
+  npx create-content-site <target-directory> --scaffold ${DEFAULT_SCAFFOLD}
+  npx create-content-site <target-directory> --scaffold ${DEFAULT_SCAFFOLD} --ref main
 
 Options:
   --scaffold <url>  GitHub scaffold repository URL. Defaults to ${DEFAULT_SCAFFOLD}
@@ -129,7 +129,7 @@ function scaffoldArchiveUrl(scaffold, refOption) {
 
   if (!owner || !repo) {
     throw new Error(
-      "The scaffold source must use the form https://github.com/owner/repo.",
+      "The scaffold source must use the form https://github.com/<owner>/<repo>.",
     );
   }
 
@@ -164,17 +164,10 @@ function run(command, args, cwd) {
   });
 }
 
-function githubAuthHeader() {
-  const token = process.env.GITHUB_TOKEN || process.env.GH_TOKEN;
-
-  return token ? { authorization: `Bearer ${token}` } : {};
-}
-
 async function downloadArchive(archiveUrl, archivePath) {
   const response = await fetch(archiveUrl, {
     headers: {
       "user-agent": "create-content-site",
-      ...githubAuthHeader(),
     },
   });
 

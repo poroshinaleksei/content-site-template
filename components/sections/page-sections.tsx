@@ -12,6 +12,7 @@ import { CtaSection } from "./cta-section";
 import { ForParentsSection } from "./for-parents-section";
 import { HeroSection } from "./hero-section";
 import { IllustrationGallerySection } from "./illustration-gallery-section";
+import { PressLinksSection } from "./press-links-section";
 import { ServicesSection } from "./services-section";
 import { WhereToBuySection } from "./where-to-buy-section";
 
@@ -48,9 +49,13 @@ async function renderSection(section: PageSection, locale: Locale) {
       return <IllustrationGallerySection key={section.id} section={section} />;
     case "where-to-buy":
       return <WhereToBuySection key={section.id} section={section} />;
+    case "press-links":
+      return <PressLinksSection key={section.id} section={section} />;
     case "for-parents":
+    case "for-kindergarten":
       return <ForParentsSection key={section.id} section={section} />;
     case "author-bio":
+    case "illustrator-bio":
       return <AuthorBioSection key={section.id} section={section} locale={locale} />;
     case "testimonials":
     case "faq":

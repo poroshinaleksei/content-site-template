@@ -44,8 +44,10 @@ If the user asks to create a new site from this repository:
 
 - treat this repository as the scaffold source
 - create a new local project first instead of customizing the source repository in place
-- use the in repository generator entry point: `pnpm generate:site <target-directory>`
-- if running from a different working directory, use `node /path/to/website-template/scripts/generate-site.mjs .`
+- prefer the published launcher entry point: `npx create-content-site <target-directory>`
+- use `npx create-content-site <target-directory> --scaffold https://github.com/poroshinaleksei/content-site-template --ref <tag-or-branch>` when a specific scaffold ref is needed
+- use the in repository generator entry point only when working from a local scaffold checkout: `pnpm generate:site <target-directory>`
+- if running from a different working directory with a local checkout, use `node /path/to/website-template/scripts/generate-site.mjs .`
 - let the generator copy the scaffold, run setup, install dependencies, and run `pnpm check`
 - run `pnpm dev` inside the generated project
 - confirm that the baseline site is runnable in a browser

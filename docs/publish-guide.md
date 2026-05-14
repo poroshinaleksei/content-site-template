@@ -1,6 +1,7 @@
 # Publish guide
 
-Use this guide when releasing the `create-content-site` npm package.
+Use this guide when releasing the `create-content-site` npm package. Use
+`docs/release-guide.md` for scaffold tag and release guidance.
 
 ## Package location
 

@@ -58,7 +58,7 @@ Preferred implementation direction:
 - allow the launcher to accept either a default scaffold source or an explicit GitHub URL
 - preserve a clean command shape such as:
   `npx create-content-site my-site`
-  `npx create-content-site my-site --scaffold https://github.com/owner/repo`
+  `npx create-content-site my-site --scaffold https://github.com/poroshinaleksei/content-site-template`
 
 ## Result
 
@@ -125,9 +125,6 @@ Recommended operational note for later:
   prompts or documentation.
 - The final design should keep the user flow simple while preserving deterministic local
   project creation.
-- Private scaffold repositories require `GITHUB_TOKEN` or `GH_TOKEN` for archive
-  download. Without a readable public archive or token, the launcher fails before it can
-  delegate to the generator.
 - Public `npx create-content-site my-site` requires the configured default scaffold
   archive to be publicly readable.
 

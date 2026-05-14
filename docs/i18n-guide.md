@@ -63,3 +63,21 @@ URLs for default and non default locales.
 
 When adding a new route, use the locale aware helpers from `lib/i18n.ts` and
 `lib/seo/metadata.ts` instead of assembling localized URLs in the route file.
+
+## Adding a locale later
+
+Adding a locale is a code and content change, not only a URL change.
+
+Update:
+
+- `Locale` in `config/types.ts`.
+- `siteConfig.locales`, `siteConfig.localeLabels`, `siteConfig.description`, and
+  `siteConfig.defaultSeo` in `config/site.ts`.
+- `i18nConfig.localePrefix` in `config/i18n.ts`.
+- shared UI labels in `config/messages.ts`.
+- navigation labels in `config/navigation.ts`.
+- page configs in `config/pages/`.
+- localized articles in `content/articles/<locale>/`.
+
+Then run `pnpm check` and inspect page metadata so canonical URLs and `hreflang`
+alternates still match the configured locales.

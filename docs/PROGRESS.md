@@ -2,6 +2,7 @@
 
 ## 2026-05-14
 
+- Added GitHub Actions checks, release guidance, clearer content mode documentation, and a more practical single children's book preset structure.
 - Simplified public launcher documentation, made the npm package the primary public entry point, and moved maintainer publish instructions into a dedicated publish guide.
 - Added the `create-content-site` launcher package for `npx` style bootstrap through GitHub archive download and generator delegation.
 - Added a task document for the `npx` style bootstrap direction and aligned it around a published launcher package instead of an in repository only bootstrap helper.

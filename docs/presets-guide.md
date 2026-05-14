@@ -34,7 +34,10 @@ Sections:
 - `IllustrationGallery`
 - `WhereToBuy`
 - `ForParents`
+- `ForKindergarten`
 - `AuthorBio`
+- `IllustratorBio`
+- `PressLinks`
 - `Contact`
 
 Pages:
@@ -47,12 +50,23 @@ Pages:
 Expected data:
 
 - Book title
+- Subtitle
 - Book description
+- Author
+- Illustrator
+- Publisher
+- ISBN
 - Cover image
 - Illustrations
 - Purchase links
+- Press or review links
 - Age range
+- Language
+- Format
+- Page count
+- Themes
 - Author bio
+- Illustrator bio
 - Contact details
 
 The preset currently overrides the home page composition. Other pages continue to use the
