@@ -2,6 +2,10 @@
 
 ## 2026-05-14
 
+- Added a clearer value proposition to `README.md`, including faster project setup, lower token usage, and more consistent client project output.
+- Adjusted the `README.md` Codex section to describe the user facing workflow first and the internal Codex actions second.
+- Refined `README.md` into a cleaner product level entrypoint with a tighter Codex usage flow and clearer scope description.
+- Updated `README.md` to reflect that scaffold phase 1 is implemented and to document the current verification baseline.
 - Added explicit frontend first and design oriented rules to `AGENTS.md` and `AGENTS.template.md`.
 - Extended `pnpm setup` and `AGENTS` templating to ask for user communication language and documentation language in generated projects.
 - Tightened scaffold source instructions in `AGENTS.md`, `README.md`, and `docs/codex-guide.md` so Codex creates a runnable baseline project before deeper customization.
